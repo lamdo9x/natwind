@@ -4,15 +4,22 @@
     "strict": true,
     "skipLibCheck": true,
     "paths": {
-      "@/*": ["./*"],
-      "@rn-ui/registry": ["../../packages/registry/index.ts"],
-      "@rn-ui/registry/*": ["../../packages/registry/*"]
+      "@/*": [
+        "./*"
+      ],
+      "@rn-ui/registry": [
+        "../../packages/registry/index.ts"
+      ],
+      "@rn-ui/registry/*": [
+        "../../packages/registry/*"
+      ]
     }
   },
   "include": [
     "**/*.ts",
     "**/*.tsx",
     ".expo/types/**/*.ts",
-    "expo-env.d.ts"
+    "expo-env.d.ts",
+    "nativewind-env.d.ts"
   ]
 }
