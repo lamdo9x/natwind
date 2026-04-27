@@ -12,14 +12,14 @@ export interface RegistryEntry {
 export const registry: Record<string, RegistryEntry> = {
   button: {
     name: "button",
-    description: "Button with variants (default, outline, ghost, destructive) and sizes",
+    description: "Button — 7 variants, 4 sizes, spring animation, haptics, icon, loading",
     files: [
       {
         source: `${GITHUB_RAW}/components/ui/button.tsx`,
         target: "components/ui/button.tsx",
       },
     ],
-    dependencies: ["clsx", "tailwind-merge"],
+    dependencies: ["clsx", "tailwind-merge", "expo-haptics", "lucide-react-native"],
     registryDependencies: [],
   },
 };
