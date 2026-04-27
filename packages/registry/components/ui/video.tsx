@@ -56,7 +56,8 @@ export function VideoPlayer({
     if (autoPlay) p.play();
   });
 
-  const { status } = useEvent(player, 'statusChange', { status: player.status });
+  const statusEvent = useEvent(player, 'statusChange');
+  const status = statusEvent?.status ?? player.status;
 
   useEffect(() => {
     const interval = setInterval(() => {

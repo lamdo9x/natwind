@@ -45,6 +45,7 @@ export interface GalleryProps {
   enableZoom?: boolean;
   enableDownload?: boolean;
   enableShare?: boolean;
+  scrollEnabled?: boolean;
   onItemPress?: (item: GalleryItem, index: number) => void;
   onDownload?: (item: GalleryItem) => void;
   onShare?: (item: GalleryItem) => void;
@@ -119,6 +120,7 @@ export function Gallery({
   enableZoom = true,
   enableDownload = false,
   enableShare = false,
+  scrollEnabled = true,
   onItemPress,
   onDownload,
   onShare,
@@ -176,7 +178,7 @@ export function Gallery({
         renderItem={renderGridItem}
         keyExtractor={(item) => item.id}
         numColumns={columns}
-        scrollEnabled={true}
+        scrollEnabled={scrollEnabled}
         contentContainerStyle={{ padding: spacing / 2 }}
       />
 
