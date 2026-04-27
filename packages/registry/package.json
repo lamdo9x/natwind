@@ -1,0 +1,17 @@
+{
+  "name": "@rn-ui/registry",
+  "version": "0.1.0",
+  "main": "./index.ts",
+  "exports": {
+    ".": "./index.ts",
+    "./components/*": "./components/*.tsx",
+    "./lib/*": "./lib/*.ts"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*",
+    "nativewind": "*",
+    "clsx": "*",
+    "tailwind-merge": "*"
+  }
+}

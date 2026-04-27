@@ -3,9 +3,9 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["./*"],
+      "@rn-ui/registry": ["../../packages/registry/index.ts"],
+      "@rn-ui/registry/*": ["../../packages/registry/*"]
     }
   },
   "include": [
