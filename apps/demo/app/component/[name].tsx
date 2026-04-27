@@ -5,6 +5,7 @@ import {
   ScrollView,
   Text as RNText,
   View as RNView,
+  Image as RNImage,
 } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -31,6 +32,9 @@ import {
   AlertDescription,
   AlertDialog,
   AlertTitle,
+  AudioPlayer,
+  AudioRecorder,
+  AudioWaveform,
   Avatar,
   AvatarFallback,
   AvatarImage,
@@ -38,6 +42,8 @@ import {
   Badge,
   BottomSheet,
   Button,
+  CameraComponent,
+  CameraPreview,
   Card,
   CardContent,
   CardDescription,
@@ -47,15 +53,21 @@ import {
   Carousel,
   Checkbox,
   Collapsible,
+  ColorPicker,
   Combobox,
   DatePicker,
+  FilePicker,
+  Gallery,
+  HelloWave,
   Icon,
   Image as UIImageComponent,
   Input,
   InputOTP,
   Link,
+  MediaPicker,
   ModeToggle,
   Onboarding,
+  ParallaxScrollView,
   Picker,
   Popover,
   PopoverBody,
@@ -68,6 +80,7 @@ import {
   ScrollView as UIScrollView,
   SearchBar,
   Separator,
+  ShareButton,
   Sheet,
   Skeleton,
   Spinner,
@@ -84,6 +97,7 @@ import {
   TabsTrigger,
   Text,
   Toggle,
+  VideoPlayer,
   View as UIView,
   useActionSheet,
   useAlertDialog,
@@ -1069,29 +1083,322 @@ function IconComponentDemo() {
   return <IconDemo />;
 }
 
+function AudioWaveformDemo() {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const bars = Array.from({ length: 40 }, () => Math.random());
+  return (
+    <>
+      <DemoSection title="Static waveform">
+        <AudioWaveform data={bars} height={60} barCount={40} animated={false} />
+      </DemoSection>
+      <DemoSection title="Animated (live)">
+        <AudioWaveform data={bars} isPlaying={isPlaying} height={60} animated />
+        <Button
+          variant="outline"
+          size="sm"
+          onPress={() => setIsPlaying((v) => !v)}
+          style={{ marginTop: 12 }}
+        >
+          {isPlaying ? "Pause" : "Play"}
+        </Button>
+      </DemoSection>
+    </>
+  );
+}
+
+function AudioPlayerDemo() {
+  return (
+    <DemoSection title="Remote audio">
+      <AudioPlayer
+        uri="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+        title="SoundHelix Song 1"
+        showWaveform
+      />
+    </DemoSection>
+  );
+}
+
+function AudioRecorderDemo() {
+  return (
+    <DemoSection title="Record & playback">
+      <AudioRecorder
+        onRecordingComplete={(uri) => console.log("Recording:", uri)}
+        maxDurationMs={30000}
+        showTimer
+        showWaveform
+      />
+    </DemoSection>
+  );
+}
+
+function FilePickerDemo() {
+  const [files, setFiles] = useState<any[]>([]);
+  return (
+    <DemoSection title="Document picker">
+      <FilePicker
+        multiple
+        maxFiles={5}
+        selectedFiles={files}
+        onSelectionChange={setFiles}
+        onError={(e) => console.warn(e)}
+        buttonText="Select Files"
+        showPreview
+      />
+    </DemoSection>
+  );
+}
+
+function MediaPickerDemo() {
+  const [assets, setAssets] = useState<any[]>([]);
+  return (
+    <>
+      <DemoSection title="Image picker (system)">
+        <MediaPicker
+          mediaType="image"
+          multiple
+          maxSelection={4}
+          selectedAssets={assets}
+          onSelectionChange={setAssets}
+          onError={(e) => console.warn(e)}
+          showPreview
+          previewSize={72}
+        />
+      </DemoSection>
+      <DemoSection title="Custom gallery UI">
+        <MediaPicker
+          gallery
+          mediaType="image"
+          multiple
+          maxSelection={6}
+          onSelectionChange={(a) => console.log("gallery pick:", a.length)}
+          onError={(e) => console.warn(e)}
+          showPreview={false}
+          buttonText="Browse Gallery"
+        />
+      </DemoSection>
+    </>
+  );
+}
+
+function GalleryDemo() {
+  const items = [
+    { id: "1", uri: "https://picsum.photos/seed/a/400/400", title: "Mountain" },
+    { id: "2", uri: "https://picsum.photos/seed/b/400/400", title: "Forest" },
+    { id: "3", uri: "https://picsum.photos/seed/c/400/400", title: "Ocean" },
+    { id: "4", uri: "https://picsum.photos/seed/d/400/400", title: "Desert" },
+    { id: "5", uri: "https://picsum.photos/seed/e/400/400", title: "City" },
+    { id: "6", uri: "https://picsum.photos/seed/f/400/400", title: "Sunset" },
+  ];
+  return (
+    <DemoSection title="Grid (tap to fullscreen)">
+      <Gallery
+        items={items}
+        columns={3}
+        spacing={2}
+        enableFullscreen
+        enableZoom
+        showPages
+        showTitles
+        scrollEnabled={false}
+      />
+    </DemoSection>
+  );
+}
+
+function HelloWaveDemo() {
+  return (
+    <DemoSection title="Sizes">
+      <RNView style={{ flexDirection: "row", gap: 24, alignItems: "center" }}>
+        <HelloWave size="sm" />
+        <HelloWave size="md" />
+        <HelloWave size="lg" />
+      </RNView>
+      <RNText style={{ fontSize: 13, color: "#9ca3af", marginTop: 8 }}>
+        sm / md / lg — repeats the wave animation 4 times
+      </RNText>
+    </DemoSection>
+  );
+}
+
+function ParallaxScrollViewDemo() {
+  return (
+    <DemoSection title="Parallax header (scroll inside)">
+      <RNView style={{ height: 300, borderRadius: 12, overflow: "hidden" }}>
+        <ParallaxScrollView
+          headerHeight={140}
+          headerImage={
+            <RNImage
+              source={{ uri: "https://picsum.photos/seed/parallax/800/400" }}
+              style={{ width: "100%", height: "100%" }}
+              resizeMode="cover"
+            />
+          }
+        >
+          {Array.from({ length: 8 }, (_, i) => (
+            <RNText
+              key={i}
+              style={{ padding: 16, fontSize: 14, color: "#374151", borderBottomWidth: 1, borderBottomColor: "#f3f4f6" }}
+            >
+              Row {i + 1} — scroll up to see parallax effect
+            </RNText>
+          ))}
+        </ParallaxScrollView>
+      </RNView>
+    </DemoSection>
+  );
+}
+
+function ShareButtonDemo() {
+  return (
+    <DemoSection title="Native share sheet">
+      <ShareButton
+        content={{ title: "rn-ui", message: "Check out this awesome React Native component library!" }}
+        showIcon
+      >
+        Share rn-ui
+      </ShareButton>
+      <ShareButton
+        variant="outline"
+        content={{ url: "https://expo.dev", title: "Expo" }}
+        showIcon
+        style={{ marginTop: 8 }}
+      >
+        Share URL
+      </ShareButton>
+    </DemoSection>
+  );
+}
+
+function CameraComponentDemo() {
+  const [visible, setVisible] = useState(false);
+  const [photo, setPhoto] = useState<string | null>(null);
+  return (
+    <>
+      <DemoSection title="Live camera">
+        <Button onPress={() => setVisible(true)} icon={Camera}>
+          Open Camera
+        </Button>
+        {photo && (
+          <RNImage
+            source={{ uri: photo }}
+            style={{ width: "100%", height: 200, borderRadius: 12, marginTop: 12 }}
+            resizeMode="cover"
+          />
+        )}
+      </DemoSection>
+      <Modal visible={visible} animationType="slide">
+        <CameraComponent
+          onCapture={(p) => { setPhoto(p.uri); setVisible(false); }}
+          onClose={() => setVisible(false)}
+          showControls
+          enableFlash
+          enableFlip
+        />
+      </Modal>
+    </>
+  );
+}
+
+function CameraPreviewDemo() {
+  const [confirmed, setConfirmed] = useState(false);
+  const sampleUri = "https://picsum.photos/seed/camera/400/600";
+  return (
+    <DemoSection title="Photo review actions">
+      {confirmed ? (
+        <RNView style={{ alignItems: "center", gap: 12 }}>
+          <RNText style={{ fontSize: 14, color: "#10b981", fontWeight: "600" }}>
+            Photo confirmed!
+          </RNText>
+          <Button variant="outline" size="sm" onPress={() => setConfirmed(false)}>
+            Reset
+          </Button>
+        </RNView>
+      ) : (
+        <RNView style={{ height: 400, borderRadius: 12, overflow: "hidden" }}>
+          <CameraPreview
+            uri={sampleUri}
+            showActions
+            enableShare
+            enableDelete
+            onRetake={() => console.log("retake")}
+            onConfirm={() => setConfirmed(true)}
+            onDelete={() => console.log("delete")}
+          />
+        </RNView>
+      )}
+    </DemoSection>
+  );
+}
+
+function ColorPickerDemo() {
+  const [color, setColor] = useState("#3b82f6");
+  return (
+    <DemoSection title="HSV picker">
+      <ColorPicker value={color} onChange={setColor} showHex showPreview />
+      <RNView
+        style={{
+          marginTop: 16,
+          height: 48,
+          borderRadius: 8,
+          backgroundColor: color,
+        }}
+      />
+      <RNText style={{ fontSize: 13, color: "#9ca3af", marginTop: 4, textAlign: "center" }}>
+        Selected: {color}
+      </RNText>
+    </DemoSection>
+  );
+}
+
+function VideoPlayerDemo() {
+  return (
+    <DemoSection title="Custom controls">
+      <VideoPlayer
+        uri="https://www.w3schools.com/html/mov_bbb.mp4"
+        showControls
+        showProgress
+        showTimer
+        height={220}
+        loop
+      />
+    </DemoSection>
+  );
+}
+
 // ─── Registry ─────────────────────────────────────────────────────────────────
 
 const DEMOS: Record<string, React.ComponentType> = {
   accordion: AccordionDemo,
   alert: AlertDemo,
   "alert-dialog": AlertDialogDemo,
+  "audio-waveform": AudioWaveformDemo,
+  "audio-player": AudioPlayerDemo,
+  "audio-recorder": AudioRecorderDemo,
   avatar: AvatarDemo,
   "avoid-keyboard": AvoidKeyboardDemo,
   badge: BadgeDemo,
   button: ButtonDemo,
+  camera: CameraComponentDemo,
+  "camera-preview": CameraPreviewDemo,
   card: CardDemo,
   carousel: CarouselDemo,
   checkbox: CheckboxDemo,
   collapsible: CollapsibleDemo,
+  "color-picker": ColorPickerDemo,
   combobox: ComboboxDemo,
   "date-picker": DatePickerDemo,
+  "file-picker": FilePickerDemo,
+  gallery: GalleryDemo,
+  "hello-wave": HelloWaveDemo,
   icon: IconComponentDemo,
   image: ImageDemo,
   input: InputDemo,
   "input-otp": InputOTPDemo,
   link: LinkDemo,
+  "media-picker": MediaPickerDemo,
   "mode-toggle": ModeToggleDemo,
   onboarding: OnboardingDemo,
+  "parallax-scroll-view": ParallaxScrollViewDemo,
   picker: PickerDemo,
   popover: PopoverDemo,
   progress: ProgressDemo,
@@ -1099,6 +1406,7 @@ const DEMOS: Record<string, React.ComponentType> = {
   "scroll-view": ScrollViewDemo,
   searchbar: SearchBarDemo,
   separator: SeparatorDemo,
+  share: ShareButtonDemo,
   "action-sheet": ActionSheetDemo,
   "bottom-sheet": BottomSheetDemo,
   sheet: SheetDemo,
@@ -1110,18 +1418,32 @@ const DEMOS: Record<string, React.ComponentType> = {
   text: TextDemo,
   toggle: ToggleDemo,
   toast: ToastDemo,
+  video: VideoPlayerDemo,
   view: ViewDemo,
 };
 
 const TITLE_MAP: Record<string, string> = {
   "input-otp": "InputOTP",
   "alert-dialog": "AlertDialog",
+  "audio-waveform": "AudioWaveform",
+  "audio-player": "AudioPlayer",
+  "audio-recorder": "AudioRecorder",
   "avoid-keyboard": "AvoidKeyboard",
+  camera: "Camera",
+  "camera-preview": "CameraPreview",
+  "color-picker": "ColorPicker",
+  "date-picker": "DatePicker",
+  "file-picker": "FilePicker",
+  gallery: "Gallery",
+  "hello-wave": "HelloWave",
+  "media-picker": "MediaPicker",
   "mode-toggle": "ModeToggle",
+  "parallax-scroll-view": "ParallaxScrollView",
   "scroll-view": "ScrollView",
+  share: "ShareButton",
   "action-sheet": "ActionSheet",
   "bottom-sheet": "BottomSheet",
-  "date-picker": "DatePicker",
+  video: "VideoPlayer",
 };
 
 function displayTitle(name: string): string {

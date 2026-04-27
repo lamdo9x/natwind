@@ -5,6 +5,7 @@ import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import "react-native-reanimated";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { ToastProvider } from "@rn-ui/registry";
 
 import { useColorScheme } from "@/components/useColorScheme";
@@ -37,36 +38,38 @@ function RootLayoutNav() {
   const colorScheme = useColorScheme();
 
   return (
-    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <ToastProvider>
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="modal" options={{ presentation: "modal" }} />
-          <Stack.Screen
-            name="component/[name]"
-            options={({ route }) => {
-              const name = (route.params as any)?.name ?? "";
-              const TITLE_MAP: Record<string, string> = {
-                "input-otp": "InputOTP",
-                "alert-dialog": "AlertDialog",
-                "avoid-keyboard": "AvoidKeyboard",
-                "mode-toggle": "ModeToggle",
-                "scroll-view": "ScrollView",
-                "action-sheet": "ActionSheet",
-                "bottom-sheet": "BottomSheet",
-                "date-picker": "DatePicker",
-              };
-              const title =
-                TITLE_MAP[name] ??
-                name
-                  .split("-")
-                  .map((w: string) => w[0]?.toUpperCase() + w.slice(1))
-                  .join("");
-              return { headerBackTitle: "Back", title };
-            }}
-          />
-        </Stack>
-      </ToastProvider>
-    </ThemeProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+        <ToastProvider>
+          <Stack>
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="modal" options={{ presentation: "modal" }} />
+            <Stack.Screen
+              name="component/[name]"
+              options={({ route }) => {
+                const name = (route.params as any)?.name ?? "";
+                const TITLE_MAP: Record<string, string> = {
+                  "input-otp": "InputOTP",
+                  "alert-dialog": "AlertDialog",
+                  "avoid-keyboard": "AvoidKeyboard",
+                  "mode-toggle": "ModeToggle",
+                  "scroll-view": "ScrollView",
+                  "action-sheet": "ActionSheet",
+                  "bottom-sheet": "BottomSheet",
+                  "date-picker": "DatePicker",
+                };
+                const title =
+                  TITLE_MAP[name] ??
+                  name
+                    .split("-")
+                    .map((w: string) => w[0]?.toUpperCase() + w.slice(1))
+                    .join("");
+                return { headerBackTitle: "Back", title };
+              }}
+            />
+          </Stack>
+        </ToastProvider>
+      </ThemeProvider>
+    </GestureHandlerRootView>
   );
 }

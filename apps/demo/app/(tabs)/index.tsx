@@ -6,11 +6,11 @@ import { SafeAreaView } from "react-native-safe-area-context";
 const SECTIONS = [
   {
     title: "Layout",
-    data: ["text", "view", "separator", "scroll-view", "avoid-keyboard"],
+    data: ["text", "view", "separator", "scroll-view", "avoid-keyboard", "parallax-scroll-view"],
   },
   {
     title: "Media",
-    data: ["icon", "image", "link"],
+    data: ["icon", "image", "link", "share", "gallery", "hello-wave"],
   },
   {
     title: "Form",
@@ -51,6 +51,20 @@ const SECTIONS = [
   {
     title: "Content",
     data: ["accordion", "collapsible", "table"],
+  },
+  {
+    title: "Native",
+    data: [
+      "camera",
+      "camera-preview",
+      "media-picker",
+      "file-picker",
+      "color-picker",
+      "audio-waveform",
+      "audio-player",
+      "audio-recorder",
+      "video",
+    ],
   },
 ];
 
@@ -94,17 +108,43 @@ const DESCRIPTIONS: Record<string, string> = {
   accordion: "Single/multiple expand, collapsible, Reanimated",
   collapsible: "Title + chevron, show/hide children",
   table: "Compound table, horizontal scroll, width prop",
+  "parallax-scroll-view": "Animated parallax header, pinch-to-scale",
+  share: "Native share sheet, URL/message/title",
+  gallery: "3-col image grid, fullscreen pager, zoom, download",
+  "hello-wave": "Animated wave emoji, sm/md/lg sizes",
+  camera: "expo-camera, flash, flip, capture, permission gating",
+  "camera-preview": "Photo review: retake, confirm, share, delete",
+  "media-picker": "System picker or custom gallery UI",
+  "file-picker": "expo-document-picker, file list preview",
+  "color-picker": "HSV gradient + hue slider + swatches",
+  "audio-waveform": "Animated bar waveform, seekable, Reanimated",
+  "audio-player": "expo-audio player with waveform + controls",
+  "audio-recorder": "Record, playback, timer, waveform preview",
+  video: "expo-video, custom controls, progress, mute, loop",
 };
 
 const TITLE_MAP: Record<string, string> = {
   "input-otp": "InputOTP",
   "alert-dialog": "AlertDialog",
+  "audio-waveform": "AudioWaveform",
+  "audio-player": "AudioPlayer",
+  "audio-recorder": "AudioRecorder",
   "avoid-keyboard": "AvoidKeyboard",
+  camera: "Camera",
+  "camera-preview": "CameraPreview",
+  "color-picker": "ColorPicker",
+  "date-picker": "DatePicker",
+  "file-picker": "FilePicker",
+  gallery: "Gallery",
+  "hello-wave": "HelloWave",
+  "media-picker": "MediaPicker",
   "mode-toggle": "ModeToggle",
+  "parallax-scroll-view": "ParallaxScrollView",
   "scroll-view": "ScrollView",
+  share: "ShareButton",
   "action-sheet": "ActionSheet",
   "bottom-sheet": "BottomSheet",
-  "date-picker": "DatePicker",
+  video: "VideoPlayer",
 };
 
 function formatTitle(name: string): string {
@@ -125,7 +165,7 @@ export default function ComponentGallery() {
           rn-ui
         </Text>
         <Text className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-          39 components · Expo + NativeWind
+          52 components · Expo + NativeWind
         </Text>
       </View>
 
