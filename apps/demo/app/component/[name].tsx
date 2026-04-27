@@ -6,7 +6,7 @@ import {
   Text as RNText,
   View as RNView,
 } from "react-native";
-import { Stack, useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
   Bell,
@@ -1139,11 +1139,9 @@ function displayTitle(name: string): string {
 export default function ComponentScreen() {
   const { name } = useLocalSearchParams<{ name: string }>();
   const Demo = name ? DEMOS[name] : null;
-  const title = name ? displayTitle(name) : "";
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }} edges={["bottom"]}>
-      <Stack.Screen options={{ title }} />
       {Demo ? (
         <ScrollView
           style={{ flex: 1 }}
