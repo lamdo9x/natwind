@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { createContext, useContext, useState } from "react";
-import { Pressable, Text, View, ViewStyle } from "react-native";
+import { Pressable, StyleSheet, Text, View, ViewStyle, useColorScheme } from "react-native";
 
 interface TabsContextType {
   activeTab: string;
@@ -84,31 +84,54 @@ export function TabsTrigger({
 }: TabsTriggerProps) {
   const { activeTab, setActiveTab } = useTabsContext();
   const isActive = activeTab === value;
+  const isDark = useColorScheme() === "dark";
 
   return (
     <Pressable
       onPress={() => !disabled && setActiveTab(value)}
       disabled={disabled}
-      className={cn(
-        "flex-1 h-8 rounded-lg items-center justify-center",
-        isActive && "bg-white dark:bg-gray-700 shadow-sm",
-        disabled && "opacity-50",
-        className
-      )}
+      style={[
+        triggerStyles.base,
+        isActive && {
+          backgroundColor: isDark ? "#374151" : "#ffffff",
+          shadowColor: "#000",
+          shadowOffset: { width: 0, height: 1 },
+          shadowOpacity: 0.05,
+          shadowRadius: 2,
+          elevation: 1,
+        },
+        disabled && { opacity: 0.5 },
+      ]}
     >
       <Text
-        className={cn(
-          "text-sm font-medium",
-          isActive
-            ? "text-gray-900 dark:text-gray-100"
-            : "text-gray-500 dark:text-gray-400"
-        )}
+        style={[
+          triggerStyles.text,
+          {
+            color: isActive
+              ? isDark ? "#f3f4f6" : "#111827"
+              : isDark ? "#9ca3af" : "#6b7280",
+          },
+        ]}
       >
         {children}
       </Text>
     </Pressable>
   );
 }
+
+const triggerStyles = StyleSheet.create({
+  base: {
+    flex: 1,
+    height: 32,
+    borderRadius: 8,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  text: {
+    fontSize: 14,
+    fontWeight: "500",
+  },
+});
 
 export interface TabsContentProps {
   value: string;
