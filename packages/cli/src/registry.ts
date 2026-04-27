@@ -425,6 +425,97 @@ export const registry: Record<string, RegistryEntry> = {
     dependencies: [],
     registryDependencies: [],
   },
+
+  "action-sheet": {
+    name: "action-sheet",
+    description: "ActionSheet — iOS-style modal action list, slide-up animation, destructive/cancel variants, useActionSheet hook",
+    files: [
+      {
+        source: `${GITHUB_RAW}/components/ui/action-sheet.tsx`,
+        target: "components/ui/action-sheet.tsx",
+      },
+    ],
+    dependencies: ["clsx", "tailwind-merge"],
+    registryDependencies: [],
+  },
+
+  "bottom-sheet": {
+    name: "bottom-sheet",
+    description: "BottomSheet — draggable bottom sheet with snap points, PanResponder gesture, handle, close button, scrollable content",
+    files: [
+      {
+        source: `${GITHUB_RAW}/components/ui/bottom-sheet.tsx`,
+        target: "components/ui/bottom-sheet.tsx",
+      },
+    ],
+    dependencies: ["clsx", "tailwind-merge", "lucide-react-native", "nativewind"],
+    registryDependencies: [],
+  },
+
+  sheet: {
+    name: "sheet",
+    description: "Sheet — slide-in panel from any side (bottom/top/left/right), title, description, close button, useSheet hook",
+    files: [
+      {
+        source: `${GITHUB_RAW}/components/ui/sheet.tsx`,
+        target: "components/ui/sheet.tsx",
+      },
+    ],
+    dependencies: ["clsx", "tailwind-merge", "lucide-react-native", "nativewind"],
+    registryDependencies: [],
+  },
+
+  carousel: {
+    name: "carousel",
+    description: "Carousel — FlatList-based horizontal pager, dot indicators, arrow buttons, snap-to-item, gap support",
+    files: [
+      {
+        source: `${GITHUB_RAW}/components/ui/carousel.tsx`,
+        target: "components/ui/carousel.tsx",
+      },
+    ],
+    dependencies: ["clsx", "tailwind-merge"],
+    registryDependencies: [],
+  },
+
+  combobox: {
+    name: "combobox",
+    description: "Combobox — searchable select dropdown, clearable, empty state, option descriptions, autofocus search",
+    files: [
+      {
+        source: `${GITHUB_RAW}/components/ui/combobox.tsx`,
+        target: "components/ui/combobox.tsx",
+      },
+    ],
+    dependencies: ["clsx", "tailwind-merge", "lucide-react-native", "nativewind"],
+    registryDependencies: [],
+  },
+
+  "date-picker": {
+    name: "date-picker",
+    description: "DatePicker — calendar grid modal, min/max date, custom format, today highlight, selected day",
+    files: [
+      {
+        source: `${GITHUB_RAW}/components/ui/date-picker.tsx`,
+        target: "components/ui/date-picker.tsx",
+      },
+    ],
+    dependencies: ["clsx", "tailwind-merge", "lucide-react-native", "nativewind"],
+    registryDependencies: [],
+  },
+
+  onboarding: {
+    name: "onboarding",
+    description: "Onboarding — multi-step FlatList pager, dot indicators, Next/Done/Skip buttons, custom step renderers",
+    files: [
+      {
+        source: `${GITHUB_RAW}/components/ui/onboarding.tsx`,
+        target: "components/ui/onboarding.tsx",
+      },
+    ],
+    dependencies: ["clsx", "tailwind-merge"],
+    registryDependencies: [],
+  },
 };
 
 export function getComponent(name: string): RegistryEntry | undefined {
