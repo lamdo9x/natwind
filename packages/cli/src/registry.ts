@@ -516,6 +516,175 @@ export const registry: Record<string, RegistryEntry> = {
     dependencies: ["clsx", "tailwind-merge"],
     registryDependencies: [],
   },
+
+  "audio-waveform": {
+    name: "audio-waveform",
+    description: "AudioWaveform — animated bar waveform, seekable progress, play/pause, Reanimated + GestureHandler",
+    files: [
+      {
+        source: `${GITHUB_RAW}/components/ui/audio-waveform.tsx`,
+        target: "components/ui/audio-waveform.tsx",
+      },
+    ],
+    dependencies: ["clsx", "tailwind-merge", "lucide-react-native", "react-native-reanimated", "react-native-gesture-handler"],
+    registryDependencies: [],
+  },
+
+  "audio-player": {
+    name: "audio-player",
+    description: "AudioPlayer — expo-audio player with waveform visualization, controls, progress, volume",
+    files: [
+      {
+        source: `${GITHUB_RAW}/components/ui/audio-player.tsx`,
+        target: "components/ui/audio-player.tsx",
+      },
+    ],
+    dependencies: ["clsx", "tailwind-merge", "lucide-react-native", "expo-audio", "react-native-reanimated", "react-native-gesture-handler"],
+    registryDependencies: ["audio-waveform"],
+  },
+
+  "audio-recorder": {
+    name: "audio-recorder",
+    description: "AudioRecorder — record audio, playback, timer, waveform preview, expo-audio",
+    files: [
+      {
+        source: `${GITHUB_RAW}/components/ui/audio-recorder.tsx`,
+        target: "components/ui/audio-recorder.tsx",
+      },
+    ],
+    dependencies: ["clsx", "tailwind-merge", "lucide-react-native", "expo-audio", "react-native-reanimated"],
+    registryDependencies: ["audio-player", "audio-waveform"],
+  },
+
+  "file-picker": {
+    name: "file-picker",
+    description: "FilePicker — expo-document-picker, multiple files, preview list, file size display",
+    files: [
+      {
+        source: `${GITHUB_RAW}/components/ui/file-picker.tsx`,
+        target: "components/ui/file-picker.tsx",
+      },
+    ],
+    dependencies: ["clsx", "tailwind-merge", "lucide-react-native", "expo-document-picker"],
+    registryDependencies: ["button", "text"],
+  },
+
+  "media-picker": {
+    name: "media-picker",
+    description: "MediaPicker — system picker or custom gallery UI, multi-select, expo-image-picker + expo-media-library",
+    files: [
+      {
+        source: `${GITHUB_RAW}/components/ui/media-picker.tsx`,
+        target: "components/ui/media-picker.tsx",
+      },
+    ],
+    dependencies: ["clsx", "tailwind-merge", "lucide-react-native", "expo-image-picker", "expo-media-library", "expo-image"],
+    registryDependencies: ["button", "text", "view"],
+  },
+
+  gallery: {
+    name: "gallery",
+    description: "Gallery — image grid, fullscreen pager, pinch-to-zoom, double-tap zoom, share, download, GestureHandler",
+    files: [
+      {
+        source: `${GITHUB_RAW}/components/ui/gallery.tsx`,
+        target: "components/ui/gallery.tsx",
+      },
+    ],
+    dependencies: ["clsx", "tailwind-merge", "lucide-react-native", "expo-image", "react-native-gesture-handler", "react-native-reanimated"],
+    registryDependencies: [],
+  },
+
+  "hello-wave": {
+    name: "hello-wave",
+    description: "HelloWave — animated wave emoji, sm/md/lg sizes, Reanimated",
+    files: [
+      {
+        source: `${GITHUB_RAW}/components/ui/hello-wave.tsx`,
+        target: "components/ui/hello-wave.tsx",
+      },
+    ],
+    dependencies: ["react-native-reanimated"],
+    registryDependencies: [],
+  },
+
+  "parallax-scroll-view": {
+    name: "parallax-scroll-view",
+    description: "ParallaxScrollView — animated parallax header, pinch-to-scale, expo-image, Reanimated",
+    files: [
+      {
+        source: `${GITHUB_RAW}/components/ui/parallax-scrollview.tsx`,
+        target: "components/ui/parallax-scrollview.tsx",
+      },
+    ],
+    dependencies: ["expo-image", "react-native-reanimated"],
+    registryDependencies: [],
+  },
+
+  share: {
+    name: "share",
+    description: "ShareButton — native Share sheet wrapper, URL/message/title, lucide icon",
+    files: [
+      {
+        source: `${GITHUB_RAW}/components/ui/share.tsx`,
+        target: "components/ui/share.tsx",
+      },
+    ],
+    dependencies: ["lucide-react-native"],
+    registryDependencies: ["button"],
+  },
+
+  camera: {
+    name: "camera",
+    description: "Camera — expo-camera, flash toggle, flip, photo capture, permission gating",
+    files: [
+      {
+        source: `${GITHUB_RAW}/components/ui/camera.tsx`,
+        target: "components/ui/camera.tsx",
+      },
+    ],
+    dependencies: ["clsx", "tailwind-merge", "lucide-react-native", "expo-camera"],
+    registryDependencies: [],
+  },
+
+  "camera-preview": {
+    name: "camera-preview",
+    description: "CameraPreview — captured photo review: retake, confirm, share, delete, expo-image",
+    files: [
+      {
+        source: `${GITHUB_RAW}/components/ui/camera-preview.tsx`,
+        target: "components/ui/camera-preview.tsx",
+      },
+    ],
+    dependencies: ["clsx", "tailwind-merge", "lucide-react-native", "expo-image"],
+    registryDependencies: [],
+  },
+
+  "color-picker": {
+    name: "color-picker",
+    description: "ColorPicker — HSV gradient canvas, hue slider, swatches, hex input, react-native-svg + GestureHandler",
+    files: [
+      {
+        source: `${GITHUB_RAW}/components/ui/color-picker.tsx`,
+        target: "components/ui/color-picker.tsx",
+      },
+    ],
+    dependencies: ["clsx", "tailwind-merge", "react-native-svg", "react-native-gesture-handler", "react-native-reanimated"],
+    registryDependencies: [],
+  },
+
+  video: {
+    name: "video",
+    description: "VideoPlayer — expo-video, custom controls, progress bar, mute, loop, fullscreen",
+    files: [
+      {
+        source: `${GITHUB_RAW}/components/ui/video.tsx`,
+        target: "components/ui/video.tsx",
+      },
+    ],
+    dependencies: ["clsx", "tailwind-merge", "lucide-react-native", "expo-video", "expo"],
+    registryDependencies: ["progress", "text"],
+  },
 };
 
 export function getComponent(name: string): RegistryEntry | undefined {
