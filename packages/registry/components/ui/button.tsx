@@ -155,13 +155,9 @@ export const Button = forwardRef<View, ButtonProps>(
                   className={cn(text, (label || children) && "mr-2")}
                 />
               )}
-              {label ? (
-                <Text className={cn("font-medium", text, sizeStyle.text)}>
-                  {label}
-                </Text>
-              ) : (
-                children
-              )}
+              <Text className={cn("font-medium", text, sizeStyle.text)}>
+                {label ?? children}
+              </Text>
             </>
           )}
         </Pressable>
