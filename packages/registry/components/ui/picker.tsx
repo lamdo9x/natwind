@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Check, ChevronDown, Search, X } from "lucide-react-native";
-import { useColorScheme } from "nativewind";
+import { useTheme } from "../../theme/theme-provider";
 import { useCallback, useMemo, useState } from "react";
 import {
   FlatList,
@@ -62,11 +62,10 @@ export function Picker({
 }: PickerProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const { colorScheme } = useColorScheme();
-  const isDark = colorScheme === "dark";
-  const iconColor = isDark ? "#9ca3af" : "#6b7280";
-  const placeholderColor = isDark ? "#6b7280" : "#9ca3af";
-  const textColor = isDark ? "#f3f4f6" : "#111827";
+  const tokens = useTheme();
+  const iconColor = tokens.mutedForeground;
+  const placeholderColor = tokens.mutedForeground;
+  const textColor = tokens.foreground;
 
   const allOptions = useMemo(() => {
     if (sections.length > 0) {
@@ -147,7 +146,7 @@ export function Picker({
     <>
       <View style={style}>
         {label && (
-          <Text className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+          <Text className="text-sm font-medium text-foreground mb-1.5">
             {label}
           </Text>
         )}
@@ -156,8 +155,8 @@ export function Picker({
           onPress={() => !disabled && setIsOpen(true)}
           className={cn(
             "flex-row items-center h-12 px-4 rounded-xl border gap-2",
-            "bg-gray-100 dark:bg-gray-800 border-transparent",
-            error && "border-red-500 dark:border-red-400",
+            "bg-muted border-transparent",
+            error && "border-destructive",
             disabled && "opacity-50"
           )}
         >
@@ -172,7 +171,7 @@ export function Picker({
         </Pressable>
 
         {error && (
-          <Text className="text-xs text-red-500 dark:text-red-400 mt-1.5">
+          <Text className="text-xs text-destructive mt-1.5">
             {error}
           </Text>
         )}
@@ -188,9 +187,9 @@ export function Picker({
           className="flex-1 bg-black/50"
           onPress={() => setIsOpen(false)}
         />
-        <View className="bg-white dark:bg-gray-900 rounded-t-2xl max-h-[70%]">
-          <View className="flex-row items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-gray-800">
-            <Text className="text-base font-semibold text-gray-900 dark:text-gray-100">
+        <View className="bg-background rounded-t-2xl max-h-[70%]">
+          <View className="flex-row items-center justify-between px-6 py-4 border-b border-border">
+            <Text className="text-base font-semibold text-foreground">
               {modalTitle}
             </Text>
             <TouchableOpacity onPress={() => setIsOpen(false)} activeOpacity={0.7}>
@@ -199,7 +198,7 @@ export function Picker({
           </View>
 
           {searchable && (
-            <View className="flex-row items-center h-11 mx-4 mt-3 mb-1 px-3 rounded-xl gap-2 bg-gray-100 dark:bg-gray-800">
+            <View className="flex-row items-center h-11 mx-4 mt-3 mb-1 px-3 rounded-xl gap-2 bg-muted">
               <Search size={14} color={iconColor} />
               <TextInput
                 value={searchQuery}
@@ -219,7 +218,7 @@ export function Picker({
             renderItem={({ item }) => {
               if (item.type === "section-header") {
                 return (
-                  <Text className="px-6 pt-4 pb-1 text-xs font-semibold uppercase text-gray-400 dark:text-gray-500 tracking-wide">
+                  <Text className="px-6 pt-4 pb-1 text-xs font-semibold uppercase text-muted-foreground tracking-wide">
                     {item.title}
                   </Text>
                 );
@@ -239,28 +238,28 @@ export function Picker({
                   )}
                 >
                   <View className="flex-1">
-                    <Text className={cn("text-sm", selected ? "text-blue-500 font-medium" : "text-gray-900 dark:text-gray-100")}>
+                    <Text className={cn("text-sm", selected ? "text-primary font-medium" : "text-foreground")}>
                       {option.label}
                     </Text>
                     {option.description && (
-                      <Text className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">
+                      <Text className="text-xs text-muted-foreground mt-0.5">
                         {option.description}
                       </Text>
                     )}
                   </View>
-                  {selected && <Check size={16} color="#3b82f6" />}
+                  {selected && <Check size={16} color={tokens.primary} />}
                 </TouchableOpacity>
               );
             }}
           />
 
           {multiple && values.length > 0 && (
-            <View className="px-6 pb-6 pt-2 border-t border-gray-100 dark:border-gray-800">
+            <View className="px-6 pb-6 pt-2 border-t border-border">
               <Pressable
                 onPress={() => setIsOpen(false)}
-                className="h-11 rounded-xl bg-blue-500 items-center justify-center"
+                className="h-11 rounded-xl bg-primary items-center justify-center"
               >
-                <Text className="text-sm font-medium text-white">
+                <Text className="text-sm font-medium text-primary-foreground">
                   Done ({values.length} selected)
                 </Text>
               </Pressable>

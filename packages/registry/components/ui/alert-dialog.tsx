@@ -102,19 +102,19 @@ export function AlertDialog({
         )}
 
         <View
-          className="w-full rounded-2xl overflow-hidden bg-white dark:bg-gray-900"
+          className="w-full rounded-2xl overflow-hidden bg-background"
           style={style}
         >
           <Animated.View style={cardStyle}>
             {(title || description) && (
               <View className="px-6 pt-6 pb-2">
                 {title && (
-                  <Text className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-1">
+                  <Text className="text-lg font-semibold text-foreground mb-1">
                     {title}
                   </Text>
                 )}
                 {description && (
-                  <Text className="text-sm text-gray-500 dark:text-gray-400">
+                  <Text className="text-sm text-muted-foreground">
                     {description}
                   </Text>
                 )}
@@ -127,18 +127,18 @@ export function AlertDialog({
               {showCancelButton && (
                 <Pressable
                   onPress={handleCancel}
-                  className="flex-1 h-11 rounded-xl border border-gray-200 dark:border-gray-700 items-center justify-center"
+                  className="flex-1 h-11 rounded-xl border border-border items-center justify-center"
                 >
-                  <Text className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                  <Text className="text-sm font-medium text-foreground">
                     {cancelText}
                   </Text>
                 </Pressable>
               )}
               <Pressable
                 onPress={handleConfirm}
-                className="flex-1 h-11 rounded-xl bg-blue-500 items-center justify-center"
+                className="flex-1 h-11 rounded-xl bg-primary items-center justify-center"
               >
-                <Text className="text-sm font-medium text-white">
+                <Text className="text-sm font-medium text-primary-foreground">
                   {confirmText}
                 </Text>
               </Pressable>

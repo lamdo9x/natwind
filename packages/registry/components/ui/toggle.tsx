@@ -1,8 +1,61 @@
 import { cn } from "@/lib/utils";
+import { cva, type VariantProps } from "class-variance-authority";
 import { Pressable, Text, ViewStyle } from "react-native";
 
-type ToggleVariant = "default" | "outline";
-type ToggleSize = "sm" | "default" | "lg";
+const toggleVariants = cva("items-center justify-center flex-row", {
+  variants: {
+    variant: {
+      default: "",
+      outline: "border",
+    },
+    size: {
+      sm: "h-8 px-2 rounded-lg",
+      default: "h-10 px-3 rounded-xl",
+      lg: "h-12 px-4 rounded-xl",
+    },
+    pressed: {
+      true: "",
+      false: "",
+    },
+  },
+  compoundVariants: [
+    { variant: "default", pressed: true,  class: "bg-primary" },
+    { variant: "default", pressed: false, class: "bg-muted" },
+    { variant: "outline", pressed: true,  class: "bg-muted border-primary" },
+    { variant: "outline", pressed: false, class: "border-border" },
+  ],
+  defaultVariants: {
+    variant: "default",
+    size: "default",
+    pressed: false,
+  },
+});
+
+const toggleTextVariants = cva("text-sm font-medium", {
+  variants: {
+    variant: {
+      default: "",
+      outline: "",
+    },
+    pressed: {
+      true: "",
+      false: "",
+    },
+  },
+  compoundVariants: [
+    { variant: "default", pressed: true,  class: "text-primary-foreground" },
+    { variant: "default", pressed: false, class: "text-muted-foreground" },
+    { variant: "outline", pressed: true,  class: "text-primary" },
+    { variant: "outline", pressed: false, class: "text-foreground" },
+  ],
+  defaultVariants: {
+    variant: "default",
+    pressed: false,
+  },
+});
+
+export type ToggleVariant = NonNullable<VariantProps<typeof toggleVariants>["variant"]>;
+export type ToggleSize = NonNullable<VariantProps<typeof toggleVariants>["size"]>;
 
 export interface ToggleProps {
   pressed?: boolean;
@@ -14,12 +67,6 @@ export interface ToggleProps {
   className?: string;
   style?: ViewStyle;
 }
-
-const sizeClasses: Record<ToggleSize, string> = {
-  sm: "h-8 px-2 rounded-lg",
-  default: "h-10 px-3 rounded-xl",
-  lg: "h-12 px-4 rounded-xl",
-};
 
 export function Toggle({
   pressed = false,
@@ -36,32 +83,14 @@ export function Toggle({
       onPress={() => !disabled && onPressedChange?.(!pressed)}
       disabled={disabled}
       className={cn(
-        "items-center justify-center flex-row",
-        sizeClasses[size],
-        variant === "default" &&
-          (pressed
-            ? "bg-blue-500"
-            : "bg-gray-100 dark:bg-gray-800"),
-        variant === "outline" &&
-          (pressed
-            ? "bg-blue-50 dark:bg-blue-950 border border-blue-500"
-            : "border border-gray-200 dark:border-gray-700"),
+        toggleVariants({ variant, size, pressed }),
         disabled && "opacity-50",
         className
       )}
       style={style}
     >
       {typeof children === "string" ? (
-        <Text
-          className={cn(
-            "text-sm font-medium",
-            pressed
-              ? variant === "default"
-                ? "text-white"
-                : "text-blue-500"
-              : "text-gray-700 dark:text-gray-300"
-          )}
-        >
+        <Text className={toggleTextVariants({ variant, pressed })}>
           {children}
         </Text>
       ) : (

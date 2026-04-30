@@ -1,4 +1,4 @@
-import { useColor } from '@/hooks/useColor';
+import { useTheme } from '../../theme/theme-provider';
 import { AudioSource, useAudioPlayer } from 'expo-audio';
 import { Pause, Play, RotateCcw, Square } from 'lucide-react-native';
 import { useCallback, useEffect, useState } from 'react';
@@ -51,9 +51,10 @@ export function AudioPlayer({
     })
   );
 
-  const textColor = useColor('text');
-  const mutedColor = useColor('textMuted');
-  const primaryColor = useColor('primary');
+  const tokens = useTheme();
+  const textColor = tokens.foreground;
+  const mutedColor = tokens.mutedForeground;
+  const primaryColor = tokens.primary;
 
   useEffect(() => {
     if (autoPlay && player.isLoaded && !player.playing) {
@@ -110,7 +111,7 @@ export function AudioPlayer({
   const progress = duration > 0 ? (position / duration) * 100 : 0;
 
   return (
-    <View className='rounded-xl p-4 gap-3 bg-gray-50 dark:bg-gray-800' style={style}>
+    <View className='rounded-xl p-4 gap-3 bg-muted' style={style}>
       {showWaveform && (
         <View className='py-1'>
           <AudioWaveform
@@ -153,8 +154,8 @@ export function AudioPlayer({
           </Button>
           <Button variant='default' size='icon' onPress={handlePlayPause} style={{ width: 56, height: 56, borderRadius: 28 }}>
             {player.playing
-              ? <Pause size={22} color='#ffffff' />
-              : <Play size={22} color='#ffffff' />
+              ? <Pause size={22} color={tokens.primaryForeground} />
+              : <Play size={22} color={tokens.primaryForeground} />
             }
           </Button>
           <Button variant='ghost' size='icon' onPress={handleStop}>

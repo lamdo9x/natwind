@@ -28,7 +28,7 @@ export function Image({
         style={containerStyle}
       >
         {fallback ?? (
-          <Text className="text-xs text-gray-400 text-center p-2">
+          <Text className="text-xs text-muted-foreground text-center p-2">
             {errorText}
           </Text>
         )}

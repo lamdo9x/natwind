@@ -39,7 +39,7 @@ export function Skeleton({
   return (
     <Animated.View
       className={cn(
-        "bg-gray-200 dark:bg-gray-700",
+        "bg-muted",
         variant === "rounded" ? "rounded-full" : "rounded-xl",
         className
       )}

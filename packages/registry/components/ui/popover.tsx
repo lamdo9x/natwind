@@ -133,7 +133,7 @@ export function PopoverContent({
       >
         <View
           className={cn(
-            "absolute bg-white dark:bg-gray-900 rounded-xl border border-gray-100 dark:border-gray-800 shadow-lg overflow-hidden",
+            "absolute bg-background rounded-xl border border-border shadow-lg overflow-hidden",
             className
           )}
           style={[{ width, top: position.top, left: position.left }, style]}
@@ -156,11 +156,11 @@ export interface PopoverHeaderProps {
 export function PopoverHeader({ children, className, style }: PopoverHeaderProps) {
   return (
     <View
-      className={cn("px-4 py-3 border-b border-gray-100 dark:border-gray-800", className)}
+      className={cn("px-4 py-3 border-b border-border", className)}
       style={style}
     >
       {typeof children === "string" ? (
-        <Text className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+        <Text className="text-sm font-semibold text-foreground">
           {children}
         </Text>
       ) : (
@@ -193,7 +193,7 @@ export interface PopoverFooterProps {
 export function PopoverFooter({ children, className, style }: PopoverFooterProps) {
   return (
     <View
-      className={cn("px-4 py-3 border-t border-gray-100 dark:border-gray-800", className)}
+      className={cn("px-4 py-3 border-t border-border", className)}
       style={style}
     >
       {children}

@@ -1,4 +1,4 @@
-import { useColor } from '@/hooks/useColor';
+import { useTheme } from '../../theme/theme-provider';
 import { Image as ExpoImage } from 'expo-image';
 import * as ImagePicker from 'expo-image-picker';
 import * as MediaLibrary from 'expo-media-library';
@@ -87,10 +87,11 @@ export const MediaPicker = forwardRef<RNView, MediaPickerProps>(
     const [galleryAssets, setGalleryAssets] = useState<MediaLibrary.Asset[]>([]);
     const prevSelectedAssetsRef = useRef<MediaAsset[]>(selectedAssets);
 
-    const textColor = useColor('text');
-    const borderColor = useColor('border');
-    const backgroundColor = useColor('background');
-    const primaryColor = useColor('primary');
+    const tokens = useTheme();
+    const textColor = tokens.foreground;
+    const borderColor = tokens.border;
+    const backgroundColor = tokens.background;
+    const primaryColor = tokens.primary;
 
     useEffect(() => {
       if (!arraysEqual(prevSelectedAssetsRef.current, selectedAssets)) {

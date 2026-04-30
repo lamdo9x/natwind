@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { X } from "lucide-react-native";
-import { useColorScheme } from "nativewind";
+import { useTheme } from "../../theme/theme-provider";
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
   Dimensions,
@@ -50,8 +50,8 @@ export function BottomSheet({
   className,
   style,
 }: BottomSheetProps) {
-  const { colorScheme } = useColorScheme();
-  const iconColor = colorScheme === "dark" ? "#9ca3af" : "#6b7280";
+  const tokens = useTheme();
+  const iconColor = tokens.mutedForeground;
 
   const snapHeights = snapPoints.map((p) => SCREEN_HEIGHT * p);
   const initialHeight = snapHeights[initialSnapIndex] ?? snapHeights[0];
@@ -165,20 +165,20 @@ export function BottomSheet({
         >
           <View
             className={cn(
-              "flex-1 bg-white dark:bg-gray-900 rounded-t-3xl overflow-hidden",
+              "flex-1 bg-background rounded-t-3xl overflow-hidden",
               className
             )}
             style={style}
           >
             <View {...panResponder.panHandlers} className="pt-3 pb-2">
               {showHandle && (
-                <View className="w-10 h-1 rounded-full bg-gray-300 dark:bg-gray-600 self-center" />
+                <View className="w-10 h-1 rounded-full bg-border self-center" />
               )}
 
               {(title || showCloseButton) && (
                 <View className="flex-row items-center justify-between px-6 pt-3 pb-1">
                   {title ? (
-                    <Text className="text-base font-semibold text-gray-900 dark:text-gray-100 flex-1">
+                    <Text className="text-base font-semibold text-foreground flex-1">
                       {title}
                     </Text>
                   ) : (

@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import { createContext, useContext, useState } from "react";
-import { Pressable, StyleSheet, Text, View, ViewStyle, useColorScheme } from "react-native";
+import { Pressable, StyleSheet, Text, View, ViewStyle } from "react-native";
+import { useTheme } from "../../theme/theme-provider";
 
 interface TabsContextType {
   activeTab: string;
@@ -59,7 +60,7 @@ export function TabsList({ children, className, style }: TabsListProps) {
   return (
     <View
       className={cn(
-        "flex-row bg-gray-100 dark:bg-gray-800 rounded-xl p-1.5",
+        "flex-row bg-muted rounded-xl p-1.5",
         className
       )}
       style={style}
@@ -84,7 +85,7 @@ export function TabsTrigger({
 }: TabsTriggerProps) {
   const { activeTab, setActiveTab } = useTabsContext();
   const isActive = activeTab === value;
-  const isDark = useColorScheme() === "dark";
+  const tokens = useTheme();
 
   return (
     <Pressable
@@ -93,7 +94,7 @@ export function TabsTrigger({
       style={[
         triggerStyles.base,
         isActive && {
-          backgroundColor: isDark ? "#374151" : "#ffffff",
+          backgroundColor: tokens.background,
           shadowColor: "#000",
           shadowOffset: { width: 0, height: 1 },
           shadowOpacity: 0.05,
@@ -106,11 +107,7 @@ export function TabsTrigger({
       <Text
         style={[
           triggerStyles.text,
-          {
-            color: isActive
-              ? isDark ? "#f3f4f6" : "#111827"
-              : isDark ? "#9ca3af" : "#6b7280",
-          },
+          { color: isActive ? tokens.foreground : tokens.mutedForeground },
         ]}
       >
         {children}

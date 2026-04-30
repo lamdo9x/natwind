@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Search, X } from "lucide-react-native";
-import { useColorScheme } from "nativewind";
+import { useTheme } from "../../theme/theme-provider";
 import { forwardRef, useCallback, useRef, useState } from "react";
 import {
   ActivityIndicator,
@@ -43,12 +43,11 @@ export const SearchBar = forwardRef<TextInput, SearchBarProps>(
     const [internalValue, setInternalValue] = useState(value ?? "");
     const [isFocused, setIsFocused] = useState(false);
     const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-    const { colorScheme } = useColorScheme();
-    const isDark = colorScheme === "dark";
+    const tokens = useTheme();
 
-    const iconColor = isDark ? "#9ca3af" : "#6b7280";
-    const placeholderColor = isDark ? "#6b7280" : "#9ca3af";
-    const textColor = isDark ? "#f3f4f6" : "#111827";
+    const iconColor = tokens.mutedForeground;
+    const placeholderColor = tokens.mutedForeground;
+    const textColor = tokens.foreground;
 
     const displayValue = value !== undefined ? value : internalValue;
     const showClear = showClearButton && displayValue.length > 0;
@@ -77,8 +76,7 @@ export const SearchBar = forwardRef<TextInput, SearchBarProps>(
       <View
         className={cn(
           "flex-row items-center h-12 px-4 rounded-xl gap-2",
-          "bg-gray-100 dark:bg-gray-800",
-          isFocused && "bg-gray-200 dark:bg-gray-700",
+          "bg-muted",
           containerClassName
         )}
         style={containerStyle}
@@ -93,8 +91,7 @@ export const SearchBar = forwardRef<TextInput, SearchBarProps>(
           placeholderTextColor={placeholderColor}
           onFocus={(e) => { setIsFocused(true); onFocus?.(e); }}
           onBlur={(e) => { setIsFocused(false); onBlur?.(e); }}
-          className="flex-1 text-base"
-          style={{ color: textColor }}
+          style={{ flex: 1, fontSize: 16, color: textColor, height: '100%' }}
           returnKeyType="search"
           onSubmitEditing={() => onSearch?.(displayValue)}
           {...props}

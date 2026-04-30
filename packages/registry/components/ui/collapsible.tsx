@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { ChevronRight } from "lucide-react-native";
+import { useTheme } from "../../theme/theme-provider";
 import { useEffect, useState } from "react";
 import { Text, TouchableOpacity, View, ViewStyle } from "react-native";
 import Animated, {
@@ -24,6 +25,7 @@ export function Collapsible({
   style,
 }: CollapsibleProps) {
   const [isOpen, setIsOpen] = useState(defaultOpen);
+  const tokens = useTheme();
   const rotation = useSharedValue(defaultOpen ? 90 : 0);
 
   useEffect(() => {
@@ -42,9 +44,9 @@ export function Collapsible({
         activeOpacity={0.7}
       >
         <Animated.View style={chevronStyle}>
-          <ChevronRight size={18} color="#6b7280" />
+          <ChevronRight size={18} color={tokens.mutedForeground} />
         </Animated.View>
-        <Text className="text-sm font-semibold text-gray-900 dark:text-gray-100">{title}</Text>
+        <Text className="text-sm font-semibold text-foreground">{title}</Text>
       </TouchableOpacity>
 
       {isOpen && <View className="mt-1 ml-6">{children}</View>}

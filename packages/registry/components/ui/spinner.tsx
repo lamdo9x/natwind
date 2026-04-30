@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { useColorScheme } from "nativewind";
+import { useTheme } from "../../theme/theme-provider";
 import { useEffect } from "react";
 import { ActivityIndicator, View, ViewStyle } from "react-native";
 import Animated, {
@@ -151,9 +151,9 @@ function BarsSpinner({ barW, barH, color }: { barW: number; barH: number; color:
 }
 
 export function Spinner({ variant = "default", size = "default", className, style }: SpinnerProps) {
-  const { colorScheme } = useColorScheme();
+  const tokens = useTheme();
   const { activitySize, dotSize, barW, barH, circleSize } = sizeDef[size];
-  const color = colorScheme === "dark" ? "#e5e7eb" : "#374151";
+  const color = tokens.foreground;
 
   return (
     <View className={cn("items-center justify-center", className)} style={style}>

@@ -93,7 +93,7 @@ export function CameraPreview({
               onPress={handleDelete}
               hitSlop={8}
             >
-              <View className='w-14 h-14 rounded-full bg-red-500/80 items-center justify-center'>
+              <View className='w-14 h-14 rounded-full bg-destructive/80 items-center justify-center'>
                 <Trash2 size={22} color='#ffffff' />
               </View>
               <Text style={{ color: '#ffffff', fontSize: 12 }}>Delete</Text>

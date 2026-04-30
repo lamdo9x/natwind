@@ -78,7 +78,7 @@ export function Onboarding({
 
   return (
     <View
-      className={cn("flex-1 bg-white dark:bg-gray-900", containerClassName)}
+      className={cn("flex-1 bg-background", containerClassName)}
       style={style}
     >
       <FlatList
@@ -107,8 +107,8 @@ export function Onboarding({
                 className={cn(
                   "h-2 rounded-full transition-all",
                   i === activeIndex
-                    ? "w-6 bg-blue-500"
-                    : "w-2 bg-gray-200 dark:bg-gray-700"
+                    ? "w-6 bg-primary"
+                    : "w-2 bg-border"
                 )}
               />
             ))}
@@ -119,9 +119,9 @@ export function Onboarding({
           {showSkip && !isLast ? (
             <Pressable
               onPress={handleSkip}
-              className="flex-1 h-12 rounded-xl border border-gray-200 dark:border-gray-700 items-center justify-center"
+              className="flex-1 h-12 rounded-xl border border-border items-center justify-center"
             >
-              <Text className="text-sm font-medium text-gray-600 dark:text-gray-400">
+              <Text className="text-sm font-medium text-muted-foreground">
                 {skipLabel}
               </Text>
             </Pressable>
@@ -130,12 +130,12 @@ export function Onboarding({
           <Pressable
             onPress={handleNext}
             className={cn(
-              "h-12 rounded-xl bg-blue-500 items-center justify-center",
+              "h-12 rounded-xl bg-primary items-center justify-center",
               showSkip && !isLast ? "flex-1" : "flex-1",
               nextButtonClassName
             )}
           >
-            <Text className="text-sm font-semibold text-white">
+            <Text className="text-sm font-semibold text-primary-foreground">
               {isLast ? doneLabel : nextLabel}
             </Text>
           </Pressable>

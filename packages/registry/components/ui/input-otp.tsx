@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils";
-import { useColorScheme } from "nativewind";
 import {
   forwardRef,
   useCallback,
@@ -56,8 +55,6 @@ export const InputOTP = forwardRef<InputOTPRef, InputOTPProps>(
   ) => {
     const inputRef = useRef<TextInput>(null);
     const [isFocused, setIsFocused] = useState(false);
-    const { colorScheme } = useColorScheme();
-    const isDark = colorScheme === "dark";
 
     const normalized = value.replace(/[^0-9]/g, "").slice(0, length);
     const activeIndex = Math.min(normalized.length, length - 1);
@@ -104,20 +101,20 @@ export const InputOTP = forwardRef<InputOTPRef, InputOTPProps>(
                   key={i}
                   className={cn(
                     "w-11 h-14 rounded-xl border-2 items-center justify-center",
-                    "bg-gray-100 dark:bg-gray-800",
+                    "bg-muted",
                     char || isActive
-                      ? "border-blue-500"
-                      : "border-gray-200 dark:border-gray-700",
-                    error && "border-red-500 dark:border-red-400",
+                      ? "border-ring"
+                      : "border-border",
+                    error && "border-destructive",
                     disabled && "opacity-50",
                     slotClassName
                   )}
                 >
                   {isActive && !char && (
-                    <View className="w-0.5 h-6 bg-blue-500" />
+                    <View className="w-0.5 h-6 bg-ring" />
                   )}
                   {char && (
-                    <Text className="text-xl font-semibold text-gray-900 dark:text-gray-100">
+                    <Text className="text-xl font-semibold text-foreground">
                       {masked ? "•" : char}
                     </Text>
                   )}
@@ -129,7 +126,7 @@ export const InputOTP = forwardRef<InputOTPRef, InputOTPProps>(
 
         {error && (
           <Text
-            className="text-xs text-red-500 dark:text-red-400 mt-1.5 text-center"
+            className="text-xs text-destructive mt-1.5 text-center"
             style={errorStyle}
           >
             {error}

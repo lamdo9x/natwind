@@ -1,4 +1,4 @@
-import { useColor } from '@/hooks/useColor';
+import { useTheme } from '../../theme/theme-provider';
 import {
   AudioModule,
   RecordingOptions,
@@ -62,9 +62,10 @@ export function AudioRecorder({
     Array.from({ length: 30 }, () => 0.2)
   );
 
-  const textColor = useColor('text');
-  const mutedColor = useColor('textMuted');
-  const redColor = useColor('red');
+  const tokens = useTheme();
+  const textColor = tokens.foreground;
+  const mutedColor = tokens.mutedForeground;
+  const redColor = tokens.destructive;
 
   const recordingPulse = useSharedValue(1);
   const durationInterval = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -156,7 +157,7 @@ export function AudioRecorder({
   };
 
   return (
-    <View className='rounded-xl p-5 items-center bg-gray-100 dark:bg-gray-800' style={style}>
+    <View className='rounded-xl p-5 items-center bg-muted' style={style}>
       {recordingUri && !isRecording ? (
         <View className='items-center w-full'>
           <AudioPlayer source={{ uri: recordingUri }} showControls showWaveform showTimer autoPlay={false} />
@@ -165,8 +166,8 @@ export function AudioRecorder({
               <Trash2 size={20} color={redColor} />
             </Button>
             <Button variant='default' onPress={handleSaveRecording}>
-              <Download size={18} color='#ffffff' />
-              <Text style={{ color: '#ffffff', marginLeft: 8 }}>Save</Text>
+              <Download size={18} color={tokens.primaryForeground} />
+              <Text style={{ color: tokens.primaryForeground, marginLeft: 8 }}>Save</Text>
             </Button>
           </View>
         </View>
@@ -209,11 +210,11 @@ export function AudioRecorder({
             <Animated.View style={pulseStyle}>
               {isRecording ? (
                 <Button variant='destructive' size='icon' onPress={handleStopRecording} style={{ width: 80, height: 80, borderRadius: 40 }}>
-                  <Square size={28} color='#ffffff' fill='#ffffff' />
+                  <Square size={28} color={tokens.destructiveForeground} fill={tokens.destructiveForeground} />
                 </Button>
               ) : (
                 <Button variant='default' size='icon' onPress={handleStartRecording} style={{ width: 80, height: 80, borderRadius: 40 }}>
-                  <Mic size={28} color='#ffffff' />
+                  <Mic size={28} color={tokens.primaryForeground} />
                 </Button>
               )}
             </Animated.View>

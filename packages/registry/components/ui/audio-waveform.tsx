@@ -1,4 +1,4 @@
-import { useColor } from '@/hooks/useColor';
+import { useTheme } from '../../theme/theme-provider';
 import React, { useEffect, useMemo } from 'react';
 import { View, ViewStyle } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
@@ -75,8 +75,9 @@ export function AudioWaveform({
   style, height = 60, barCount = 50, barWidth = 3, activeColor, inactiveColor,
   animated = true, showProgress = false, interactive = false,
 }: AudioWaveformProps) {
-  const primaryColor = useColor('primary');
-  const mutedColor = useColor('muted');
+  const tokens = useTheme();
+  const primaryColor = tokens.primary;
+  const mutedColor = tokens.muted;
   const resolvedActiveColor = activeColor ?? primaryColor;
   const resolvedInactiveColor = inactiveColor ?? mutedColor;
 

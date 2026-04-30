@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { ChevronDown } from "lucide-react-native";
+import { useTheme } from "../../theme/theme-provider";
 import { createContext, useContext, useEffect, useState } from "react";
 import { Text, TouchableOpacity, View, ViewStyle } from "react-native";
 import Animated, {
@@ -91,7 +92,7 @@ export function AccordionItem({ value, children, className, style }: AccordionIt
   return (
     <AccordionItemContext.Provider value={{ isOpen, toggle }}>
       <View
-        className={cn("border-b border-gray-200 dark:border-gray-700", className)}
+        className={cn("border-b border-border", className)}
         style={style}
       >
         {children}
@@ -107,6 +108,7 @@ interface AccordionTriggerProps {
 
 export function AccordionTrigger({ children, className }: AccordionTriggerProps) {
   const ctx = useContext(AccordionItemContext)!;
+  const tokens = useTheme();
   const rotation = useSharedValue(ctx.isOpen ? 180 : 0);
 
   useEffect(() => {
@@ -123,11 +125,11 @@ export function AccordionTrigger({ children, className }: AccordionTriggerProps)
       onPress={ctx.toggle}
       activeOpacity={0.7}
     >
-      <Text className="text-sm font-medium text-gray-900 dark:text-gray-100 flex-1 mr-2">
+      <Text className="text-sm font-medium text-foreground flex-1 mr-2">
         {children}
       </Text>
       <Animated.View style={chevronStyle}>
-        <ChevronDown size={16} color="#6b7280" />
+        <ChevronDown size={16} color={tokens.mutedForeground} />
       </Animated.View>
     </TouchableOpacity>
   );

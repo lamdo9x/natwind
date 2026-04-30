@@ -53,13 +53,13 @@ export function AvatarFallback({
   return (
     <View
       className={cn(
-        "w-full h-full bg-gray-200 dark:bg-gray-700 items-center justify-center",
+        "w-full h-full bg-muted items-center justify-center",
         className
       )}
       style={style}
     >
       <Text
-        className={cn("text-sm font-semibold text-gray-600 dark:text-gray-300", textClassName)}
+        className={cn("text-sm font-semibold text-muted-foreground", textClassName)}
         style={textStyle}
       >
         {children}

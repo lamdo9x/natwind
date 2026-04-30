@@ -1,4 +1,4 @@
-import { useColor } from '@/hooks/useColor';
+import { useTheme } from '../../theme/theme-provider';
 import { useCallback, useState } from 'react';
 import { LayoutChangeEvent, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { Defs, LinearGradient, Rect, Stop, Svg } from 'react-native-svg';
@@ -57,9 +57,10 @@ export function ColorPicker({
   const [svWidth, setSvWidth] = useState(0);
   const [hueWidth, setHueWidth] = useState(0);
 
-  const textColor = useColor('text');
-  const mutedColor = useColor('textMuted');
-  const borderColor = useColor('border');
+  const tokens = useTheme();
+  const textColor = tokens.foreground;
+  const mutedColor = tokens.mutedForeground;
+  const borderColor = tokens.border;
 
   const currentColor = hsvToHex(...hsv);
   const hueColor = hsvToHex(hsv[0], 1, 1);

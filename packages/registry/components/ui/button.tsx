@@ -1,4 +1,6 @@
 import { cn } from "@/lib/utils";
+import { useTheme } from "../../theme/theme-provider";
+import { cva, type VariantProps } from "class-variance-authority";
 import * as Haptics from "expo-haptics";
 import { LucideProps } from "lucide-react-native";
 import { forwardRef } from "react";
@@ -16,22 +18,64 @@ import Animated, {
   withSpring,
 } from "react-native-reanimated";
 
-export type ButtonVariant =
-  | "default"
-  | "destructive"
-  | "success"
-  | "outline"
-  | "secondary"
-  | "ghost"
-  | "link";
+export const buttonVariants = cva("flex-row items-center justify-center", {
+  variants: {
+    variant: {
+      default: "bg-primary active:opacity-90",
+      destructive: "bg-destructive active:opacity-90",
+      success: "bg-success active:opacity-90",
+      outline: "border border-border bg-transparent active:bg-muted",
+      secondary: "bg-secondary active:opacity-80",
+      ghost: "bg-transparent active:bg-muted",
+      link: "bg-transparent",
+    },
+    size: {
+      default: "h-12 px-8 rounded-xl",
+      sm: "h-11 px-6 rounded-lg",
+      lg: "h-14 px-9 rounded-2xl",
+      icon: "h-12 w-12 rounded-xl",
+    },
+  },
+  defaultVariants: {
+    variant: "default",
+    size: "default",
+  },
+});
 
-export type ButtonSize = "default" | "sm" | "lg" | "icon";
+export const buttonTextVariants = cva("font-medium", {
+  variants: {
+    variant: {
+      default: "text-primary-foreground",
+      destructive: "text-destructive-foreground",
+      success: "text-success-foreground",
+      outline: "text-primary",
+      secondary: "text-secondary-foreground",
+      ghost: "text-primary",
+      link: "text-primary underline",
+    },
+    size: {
+      default: "text-base",
+      sm: "text-sm",
+      lg: "text-lg",
+      icon: "text-base",
+    },
+  },
+  defaultVariants: {
+    variant: "default",
+    size: "default",
+  },
+});
 
-export interface ButtonProps extends Omit<PressableProps, "style"> {
+const iconSizes = { default: 18, sm: 16, lg: 20, icon: 18 } as const;
+
+export type ButtonVariant = NonNullable<VariantProps<typeof buttonVariants>["variant"]>;
+export type ButtonSize = NonNullable<VariantProps<typeof buttonVariants>["size"]>;
+
+export interface ButtonProps
+  extends Omit<PressableProps, "style">,
+    VariantProps<typeof buttonVariants> {
   label?: string;
   children?: React.ReactNode;
-  variant?: ButtonVariant;
-  size?: ButtonSize;
   loading?: boolean;
   animation?: boolean;
   haptic?: boolean;
@@ -39,54 +83,6 @@ export interface ButtonProps extends Omit<PressableProps, "style"> {
   className?: string;
   style?: ViewStyle;
 }
-
-const variantClasses: Record<ButtonVariant, { container: string; text: string }> = {
-  default: {
-    container: "bg-blue-500 active:bg-blue-600 dark:bg-blue-600 dark:active:bg-blue-700",
-    text: "text-white",
-  },
-  destructive: {
-    container: "bg-red-500 active:bg-red-600 dark:bg-red-600 dark:active:bg-red-700",
-    text: "text-white",
-  },
-  success: {
-    container: "bg-green-500 active:bg-green-600 dark:bg-green-600 dark:active:bg-green-700",
-    text: "text-white",
-  },
-  outline: {
-    container: "border border-gray-200 dark:border-gray-700 bg-transparent active:bg-gray-50 dark:active:bg-gray-800",
-    text: "text-blue-500 dark:text-blue-400",
-  },
-  secondary: {
-    container: "bg-gray-100 dark:bg-gray-800 active:bg-gray-200 dark:active:bg-gray-700",
-    text: "text-gray-900 dark:text-gray-100",
-  },
-  ghost: {
-    container: "bg-transparent active:bg-gray-100 dark:active:bg-gray-800",
-    text: "text-blue-500 dark:text-blue-400",
-  },
-  link: {
-    container: "bg-transparent",
-    text: "text-blue-500 dark:text-blue-400 underline",
-  },
-};
-
-const sizeClasses: Record<ButtonSize, { container: string; text: string; iconSize: number }> = {
-  default: { container: "h-12 px-8 rounded-xl",  text: "text-base", iconSize: 18 },
-  sm:      { container: "h-11 px-6 rounded-lg",  text: "text-sm",   iconSize: 16 },
-  lg:      { container: "h-14 px-9 rounded-2xl", text: "text-lg",   iconSize: 20 },
-  icon:    { container: "h-12 w-12 rounded-xl",  text: "text-base", iconSize: 18 },
-};
-
-const spinnerColor: Record<ButtonVariant, string> = {
-  default:     "#ffffff",
-  destructive: "#ffffff",
-  success:     "#ffffff",
-  outline:     "#3b82f6",
-  secondary:   "#111827",
-  ghost:       "#3b82f6",
-  link:        "#3b82f6",
-};
 
 export const Button = forwardRef<View, ButtonProps>(
   (
@@ -108,6 +104,7 @@ export const Button = forwardRef<View, ButtonProps>(
     },
     ref
   ) => {
+    const tokens = useTheme();
     const scale = useSharedValue(1);
 
     const animatedStyle = useAnimatedStyle(() => ({
@@ -125,8 +122,18 @@ export const Button = forwardRef<View, ButtonProps>(
       onPressOut?.(e);
     };
 
-    const { container, text } = variantClasses[variant];
-    const sizeStyle = sizeClasses[size];
+    const spinnerColors: Record<ButtonVariant, string> = {
+      default: tokens.primaryForeground,
+      destructive: tokens.destructiveForeground,
+      success: tokens.successForeground,
+      outline: tokens.primary,
+      secondary: tokens.secondaryForeground,
+      ghost: tokens.primary,
+      link: tokens.primary,
+    };
+
+    const resolvedVariant = variant ?? "default";
+    const resolvedSize = size ?? "default";
 
     return (
       <Animated.View style={animatedStyle}>
@@ -136,9 +143,7 @@ export const Button = forwardRef<View, ButtonProps>(
           onPressOut={handlePressOut}
           disabled={disabled || loading}
           className={cn(
-            "flex-row items-center justify-center",
-            container,
-            sizeStyle.container,
+            buttonVariants({ variant, size }),
             (disabled || loading) && "opacity-50",
             className
           )}
@@ -146,16 +151,19 @@ export const Button = forwardRef<View, ButtonProps>(
           {...props}
         >
           {loading ? (
-            <ActivityIndicator size="small" color={spinnerColor[variant]} />
+            <ActivityIndicator size="small" color={spinnerColors[resolvedVariant]} />
           ) : (
             <>
               {IconComponent && (
                 <IconComponent
-                  size={sizeStyle.iconSize}
-                  className={cn(text, (label || children) && "mr-2")}
+                  size={iconSizes[resolvedSize]}
+                  className={cn(
+                    buttonTextVariants({ variant }),
+                    (label || children) && "mr-2"
+                  )}
                 />
               )}
-              <Text className={cn("font-medium", text, sizeStyle.text)}>
+              <Text className={buttonTextVariants({ variant, size })}>
                 {label ?? children}
               </Text>
             </>

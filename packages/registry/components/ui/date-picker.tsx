@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { CalendarDays, ChevronLeft, ChevronRight } from "lucide-react-native";
-import { useColorScheme } from "nativewind";
+import { useTheme } from "../../theme/theme-provider";
 import { useCallback, useMemo, useState } from "react";
 import { Modal, Pressable, Text, View, ViewStyle } from "react-native";
 
@@ -66,8 +66,8 @@ export function DatePicker({
 }: DatePickerProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [viewDate, setViewDate] = useState(value ?? new Date());
-  const { colorScheme } = useColorScheme();
-  const iconColor = colorScheme === "dark" ? "#9ca3af" : "#6b7280";
+  const tokens = useTheme();
+  const iconColor = tokens.mutedForeground;
 
   const year = viewDate.getFullYear();
   const month = viewDate.getMonth();
@@ -116,7 +116,7 @@ export function DatePicker({
     <>
       <View style={style}>
         {label && (
-          <Text className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+          <Text className="text-sm font-medium text-foreground mb-1.5">
             {label}
           </Text>
         )}
@@ -125,8 +125,8 @@ export function DatePicker({
           onPress={() => !disabled && setIsOpen(true)}
           className={cn(
             "flex-row items-center h-12 px-4 rounded-xl border gap-2",
-            "bg-gray-100 dark:bg-gray-800 border-transparent",
-            error && "border-red-500 dark:border-red-400",
+            "bg-muted border-transparent",
+            error && "border-destructive",
             disabled && "opacity-50"
           )}
         >
@@ -134,8 +134,8 @@ export function DatePicker({
             className={cn(
               "flex-1 text-base",
               displayText
-                ? "text-gray-900 dark:text-gray-100"
-                : "text-gray-400 dark:text-gray-500"
+                ? "text-foreground"
+                : "text-muted-foreground"
             )}
           >
             {displayText || placeholder}
@@ -144,7 +144,7 @@ export function DatePicker({
         </Pressable>
 
         {error && (
-          <Text className="text-xs text-red-500 dark:text-red-400 mt-1.5">
+          <Text className="text-xs text-destructive mt-1.5">
             {error}
           </Text>
         )}
@@ -160,14 +160,14 @@ export function DatePicker({
           className="flex-1 bg-black/40 items-center justify-center px-4"
           onPress={() => setIsOpen(false)}
         >
-          <Pressable onPress={(e) => e.stopPropagation()}>
-            <View className="bg-white dark:bg-gray-900 rounded-2xl p-4 w-full max-w-sm shadow-xl">
+          <Pressable onPress={(e) => e.stopPropagation()} className="w-full max-w-sm">
+            <View className="bg-background rounded-2xl p-4 w-full shadow-xl">
               {/* Header */}
               <View className="flex-row items-center justify-between mb-4">
                 <Pressable onPress={prevMonth} hitSlop={8} className="p-1">
                   <ChevronLeft size={20} color={iconColor} />
                 </Pressable>
-                <Text className="text-base font-semibold text-gray-900 dark:text-gray-100">
+                <Text className="text-base font-semibold text-foreground">
                   {MONTHS[month]} {year}
                 </Text>
                 <Pressable onPress={nextMonth} hitSlop={8} className="p-1">
@@ -179,7 +179,7 @@ export function DatePicker({
               <View className="flex-row mb-2">
                 {DAYS.map((d) => (
                   <View key={d} className="flex-1 items-center">
-                    <Text className="text-xs font-medium text-gray-400 dark:text-gray-500">
+                    <Text className="text-xs font-medium text-muted-foreground">
                       {d}
                     </Text>
                   </View>
@@ -208,20 +208,20 @@ export function DatePicker({
                         <View
                           className={cn(
                             "w-9 h-9 rounded-full items-center justify-center",
-                            isSelected && "bg-blue-500",
-                            !isSelected && isToday && "border border-blue-500"
+                            isSelected && "bg-primary",
+                            !isSelected && isToday && "border border-primary"
                           )}
                         >
                           <Text
                             className={cn(
                               "text-sm",
                               isSelected
-                                ? "text-white font-semibold"
+                                ? "text-primary-foreground font-semibold"
                                 : isToday
-                                ? "text-blue-500 font-medium"
+                                ? "text-primary font-medium"
                                 : isDis
-                                ? "text-gray-300 dark:text-gray-600"
-                                : "text-gray-900 dark:text-gray-100"
+                                ? "text-muted-foreground opacity-50"
+                                : "text-foreground"
                             )}
                           >
                             {day}

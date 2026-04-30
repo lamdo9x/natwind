@@ -1,4 +1,3 @@
-import { useColor } from '@/hooks/useColor';
 import { useEvent } from 'expo';
 import { useVideoPlayer, VideoView } from 'expo-video';
 import { Maximize2, Pause, Play, RotateCcw, Volume2, VolumeX } from 'lucide-react-native';
@@ -47,8 +46,6 @@ export function VideoPlayer({
   const [position, setPosition] = useState(0);
   const [duration, setDuration] = useState(0);
   const [controlsVisible, setControlsVisible] = useState(true);
-
-  const textColor = useColor('text');
 
   const player = useVideoPlayer(uri, (p) => {
     p.loop = loop;

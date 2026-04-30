@@ -1,4 +1,5 @@
 import { LucideProps } from "lucide-react-native";
+import { useTheme } from "../../theme/theme-provider";
 import { useColorScheme } from "nativewind";
 
 export type IconProps = LucideProps & {
@@ -16,12 +17,11 @@ export function Icon({
   strokeWidth = 1.8,
   ...rest
 }: IconProps) {
+  const tokens = useTheme();
   const { colorScheme } = useColorScheme();
-  const themedColor =
-    color ??
-    (colorScheme === "dark"
-      ? (darkColor ?? "#e5e7eb")
-      : (lightColor ?? "#374151"));
+  const themedColor = color ?? (colorScheme === "dark"
+    ? (darkColor ?? tokens.foreground)
+    : (lightColor ?? tokens.foreground));
 
   return (
     <IconComponent

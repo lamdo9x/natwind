@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Check } from "lucide-react-native";
+import { useTheme } from "../../theme/theme-provider";
 import { Text, TouchableOpacity, View, ViewStyle } from "react-native";
 
 interface CheckboxProps {
@@ -21,6 +22,7 @@ export function Checkbox({
   className,
   style,
 }: CheckboxProps) {
+  const tokens = useTheme();
   return (
     <View className={cn("gap-1", className)} style={style}>
       <TouchableOpacity
@@ -33,18 +35,18 @@ export function Checkbox({
           className={cn(
             "w-5 h-5 rounded items-center justify-center border-2",
             checked
-              ? "bg-blue-500 border-blue-500"
-              : "bg-transparent border-gray-300 dark:border-gray-600"
+              ? "bg-primary border-primary"
+              : "bg-transparent border-border"
           )}
         >
-          {checked && <Check size={12} color="#ffffff" strokeWidth={3} />}
+          {checked && <Check size={12} color={tokens.primaryForeground} strokeWidth={3} />}
         </View>
         {label && (
-          <Text className="text-sm text-gray-900 dark:text-gray-100">{label}</Text>
+          <Text className="text-sm text-foreground">{label}</Text>
         )}
       </TouchableOpacity>
       {error && (
-        <Text className="text-xs text-red-500 ml-8">{error}</Text>
+        <Text className="text-xs text-destructive ml-8">{error}</Text>
       )}
     </View>
   );

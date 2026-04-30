@@ -1,4 +1,4 @@
-import { useColor } from '@/hooks/useColor';
+import { useTheme } from '../../theme/theme-provider';
 import * as DocumentPicker from 'expo-document-picker';
 import { File, Image, X } from 'lucide-react-native';
 import React, { forwardRef, useCallback, useImperativeHandle, useState } from 'react';
@@ -60,8 +60,9 @@ export const FilePicker = forwardRef<FilePickerMethods, FilePickerProps>(
   ) => {
     const [selectedFiles, setSelectedFiles] = useState<SelectedFile[]>([]);
 
-    const mutedColor = useColor('textMuted');
-    const primaryColor = useColor('primary');
+    const tokens = useTheme();
+    const mutedColor = tokens.mutedForeground;
+    const primaryColor = tokens.primary;
 
     useImperativeHandle(ref, () => ({
       clearFiles: () => {
@@ -149,9 +150,9 @@ export const FilePicker = forwardRef<FilePickerMethods, FilePickerProps>(
         />
 
         {showFileInfo && selectedFiles.length > 0 && (
-          <ScrollView className='mt-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 max-h-48'>
+          <ScrollView className='mt-2 rounded-lg border border-border bg-muted max-h-48'>
             {selectedFiles.map((file, index) => (
-              <View key={index} className='flex-row items-center p-3 gap-2.5 border-b border-gray-200 dark:border-gray-700'>
+              <View key={index} className='flex-row items-center p-3 gap-2.5 border-b border-border'>
                 {fileType === 'image'
                   ? <Image size={16} color={primaryColor} />
                   : <File size={16} color={primaryColor} />

@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { X } from "lucide-react-native";
-import { useColorScheme } from "nativewind";
+import { useTheme } from "../../theme/theme-provider";
 import { useCallback, useEffect, useState } from "react";
 import { Dimensions, Modal, Pressable, Text, View, ViewStyle } from "react-native";
 import Animated, {
@@ -49,8 +49,8 @@ export function Sheet({
   className,
   style,
 }: SheetProps) {
-  const { colorScheme } = useColorScheme();
-  const iconColor = colorScheme === "dark" ? "#9ca3af" : "#6b7280";
+  const tokens = useTheme();
+  const iconColor = tokens.mutedForeground;
 
   const isHorizontal = side === "left" || side === "right";
   const defaultSize = isHorizontal ? SCREEN_WIDTH * 0.8 : SCREEN_HEIGHT * 0.5;
@@ -135,23 +135,23 @@ export function Sheet({
         <Animated.View style={[positionStyle, sheetAnimStyle]}>
           <View
             className={cn(
-              "flex-1 bg-white dark:bg-gray-900 overflow-hidden",
+              "flex-1 bg-background overflow-hidden",
               roundedClass,
               className
             )}
             style={style}
           >
             {(title || description || showCloseButton) && (
-              <View className="px-6 pt-6 pb-4 border-b border-gray-100 dark:border-gray-800">
+              <View className="px-6 pt-6 pb-4 border-b border-border">
                 <View className="flex-row items-start justify-between">
                   <View className="flex-1 mr-4">
                     {title && (
-                      <Text className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                      <Text className="text-lg font-semibold text-foreground">
                         {title}
                       </Text>
                     )}
                     {description && (
-                      <Text className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                      <Text className="text-sm text-muted-foreground mt-1">
                         {description}
                       </Text>
                     )}

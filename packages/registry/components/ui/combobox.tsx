@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Check, ChevronDown, Search, X } from "lucide-react-native";
-import { useColorScheme } from "nativewind";
+import { useTheme } from "../../theme/theme-provider";
 import { useCallback, useMemo, useRef, useState } from "react";
 import {
   FlatList,
@@ -48,11 +48,10 @@ export function Combobox({
 }: ComboboxProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
-  const { colorScheme } = useColorScheme();
-  const isDark = colorScheme === "dark";
-  const iconColor = isDark ? "#9ca3af" : "#6b7280";
-  const placeholderColor = isDark ? "#6b7280" : "#9ca3af";
-  const textColor = isDark ? "#f3f4f6" : "#111827";
+  const tokens = useTheme();
+  const iconColor = tokens.mutedForeground;
+  const placeholderColor = tokens.mutedForeground;
+  const textColor = tokens.foreground;
 
   const selected = useMemo(
     () => options.find((o) => o.value === value),
@@ -95,7 +94,7 @@ export function Combobox({
     <>
       <View style={style}>
         {label && (
-          <Text className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+          <Text className="text-sm font-medium text-foreground mb-1.5">
             {label}
           </Text>
         )}
@@ -104,8 +103,8 @@ export function Combobox({
           onPress={handleOpen}
           className={cn(
             "flex-row items-center h-12 px-4 rounded-xl border gap-2",
-            "bg-gray-100 dark:bg-gray-800 border-transparent",
-            error && "border-red-500 dark:border-red-400",
+            "bg-muted border-transparent",
+            error && "border-destructive",
             disabled && "opacity-50"
           )}
         >
@@ -127,7 +126,7 @@ export function Combobox({
         </Pressable>
 
         {error && (
-          <Text className="text-xs text-red-500 dark:text-red-400 mt-1.5">
+          <Text className="text-xs text-destructive mt-1.5">
             {error}
           </Text>
         )}
@@ -143,9 +142,9 @@ export function Combobox({
           className="flex-1 bg-black/40"
           onPress={() => setIsOpen(false)}
         />
-        <View className="absolute left-0 right-0 bottom-0 bg-white dark:bg-gray-900 rounded-t-2xl max-h-[60%]">
+        <View className="absolute left-0 right-0 bottom-0 bg-background rounded-t-2xl max-h-[60%]">
           <View className="px-4 pt-4 pb-2">
-            <View className="flex-row items-center h-11 px-3 rounded-xl gap-2 bg-gray-100 dark:bg-gray-800">
+            <View className="flex-row items-center h-11 px-3 rounded-xl gap-2 bg-muted">
               <Search size={14} color={iconColor} />
               <TextInput
                 value={query}
@@ -166,7 +165,7 @@ export function Combobox({
 
           {filtered.length === 0 ? (
             <View className="py-10 items-center">
-              <Text className="text-sm text-gray-400 dark:text-gray-500">
+              <Text className="text-sm text-muted-foreground">
                 {emptyText}
               </Text>
             </View>
@@ -191,19 +190,19 @@ export function Combobox({
                         className={cn(
                           "text-sm",
                           isSelected
-                            ? "text-blue-500 font-medium"
-                            : "text-gray-900 dark:text-gray-100"
+                            ? "text-primary font-medium"
+                            : "text-foreground"
                         )}
                       >
                         {item.label}
                       </Text>
                       {item.description && (
-                        <Text className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">
+                        <Text className="text-xs text-muted-foreground mt-0.5">
                           {item.description}
                         </Text>
                       )}
                     </View>
-                    {isSelected && <Check size={16} color="#3b82f6" />}
+                    {isSelected && <Check size={16} color={tokens.primary} />}
                   </Pressable>
                 );
               }}

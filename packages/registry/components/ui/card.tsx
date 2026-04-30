@@ -10,7 +10,7 @@ interface CardProps {
 export function Card({ children, className, style }: CardProps) {
   return (
     <View
-      className={cn("w-full bg-white dark:bg-gray-900 rounded-2xl p-[18px] shadow-sm", className)}
+      className={cn("w-full bg-background rounded-2xl p-[18px] shadow-sm border border-border", className)}
       style={style}
     >
       {children}
@@ -41,7 +41,7 @@ interface CardTitleProps {
 export function CardTitle({ children, className, style }: CardTitleProps) {
   return (
     <Text
-      className={cn("text-lg font-semibold text-gray-900 dark:text-gray-100", className)}
+      className={cn("text-lg font-semibold text-foreground", className)}
       style={style}
     >
       {children}
@@ -58,7 +58,7 @@ interface CardDescriptionProps {
 export function CardDescription({ children, className, style }: CardDescriptionProps) {
   return (
     <Text
-      className={cn("text-sm text-gray-500 dark:text-gray-400", className)}
+      className={cn("text-sm text-muted-foreground", className)}
       style={style}
     >
       {children}

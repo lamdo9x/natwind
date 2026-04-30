@@ -42,7 +42,7 @@ export function Switch({
         activeOpacity={0.8}
         className={cn(
           "w-12 h-7 rounded-full justify-center",
-          checked ? "bg-blue-500" : "bg-gray-200 dark:bg-gray-700",
+          checked ? "bg-primary" : "bg-muted",
           disabled && "opacity-50"
         )}
       >
@@ -52,7 +52,7 @@ export function Switch({
         />
       </TouchableOpacity>
       {label && (
-        <Text className="text-sm text-gray-900 dark:text-gray-100">{label}</Text>
+        <Text className="text-sm text-foreground">{label}</Text>
       )}
     </View>
   );

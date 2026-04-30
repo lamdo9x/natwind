@@ -42,15 +42,15 @@ export function ParallaxScrollView({
     <Animated.ScrollView
       ref={scrollRef}
       scrollEventThrottle={16}
-      className='flex-1 bg-white dark:bg-gray-900'
+      className='flex-1 bg-background'
     >
       <Animated.View
-        className='overflow-hidden bg-white dark:bg-gray-900'
+        className='overflow-hidden bg-background'
         style={[{ height: headerHeight }, headerAnimatedStyle]}
       >
         {headerImage}
       </Animated.View>
-      <Animated.View className='flex-1 p-8 gap-4 overflow-hidden bg-white dark:bg-gray-900'>
+      <Animated.View className='flex-1 p-8 gap-4 overflow-hidden bg-background'>
         {children}
       </Animated.View>
     </Animated.ScrollView>

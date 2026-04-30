@@ -31,7 +31,7 @@ export interface TableHeaderProps {
 export function TableHeader({ children, className, style }: TableHeaderProps) {
   return (
     <View
-      className={cn("flex-row border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50", className)}
+      className={cn("flex-row border-b border-border bg-muted", className)}
       style={style}
     >
       {children}
@@ -62,7 +62,7 @@ export interface TableFooterProps {
 export function TableFooter({ children, className, style }: TableFooterProps) {
   return (
     <View
-      className={cn("flex-row border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50", className)}
+      className={cn("flex-row border-t border-border bg-muted", className)}
       style={style}
     >
       {children}
@@ -80,7 +80,7 @@ export interface TableRowProps {
 export function TableRow({ children, className, style }: TableRowProps) {
   return (
     <View
-      className={cn("flex-row border-b border-gray-100 dark:border-gray-800", className)}
+      className={cn("flex-row border-b border-border", className)}
       style={style}
     >
       {children}
@@ -101,7 +101,7 @@ export function TableHead({ children, className, style, width }: TableHeadProps)
       className={cn("px-4 py-3 justify-center", className)}
       style={[width ? { width } : { flex: 1 }, style]}
     >
-      <Text className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+      <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
         {children}
       </Text>
     </View>
@@ -122,7 +122,7 @@ export function TableCell({ children, className, style, width }: TableCellProps)
       style={[width ? { width } : { flex: 1 }, style]}
     >
       {typeof children === "string" ? (
-        <Text className="text-sm text-gray-900 dark:text-gray-100">{children}</Text>
+        <Text className="text-sm text-foreground">{children}</Text>
       ) : (
         children
       )}

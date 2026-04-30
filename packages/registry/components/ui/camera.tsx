@@ -47,13 +47,13 @@ export function CameraComponent({
 
   if (!permission.granted) {
     return (
-      <View className='flex-1 items-center justify-center bg-black gap-4' style={style}>
-        <Text className='text-white text-base text-center px-8'>Camera permission is required to use this feature.</Text>
+      <View className='flex-1 items-center justify-center bg-background gap-4' style={style}>
+        <Text className='text-foreground text-base text-center px-8'>Camera permission is required to use this feature.</Text>
         <TouchableOpacity
-          className='bg-white rounded-full px-6 py-3'
+          className='bg-primary rounded-full px-6 py-3'
           onPress={requestPermission}
         >
-          <Text className='text-black font-semibold'>Grant Permission</Text>
+          <Text className='text-primary-foreground font-semibold'>Grant Permission</Text>
         </TouchableOpacity>
       </View>
     );

@@ -1,26 +1,33 @@
 import { cn } from "@/lib/utils";
+import { cva, type VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
 import { Text as RNText, TextProps as RNTextProps } from "react-native";
 
-export type TextVariant = "body" | "title" | "subtitle" | "caption" | "heading" | "link";
+export const textVariants = cva("", {
+  variants: {
+    variant: {
+      heading:  "text-[28px] font-extrabold text-foreground",
+      title:    "text-2xl font-bold text-foreground",
+      subtitle: "text-[19px] font-semibold text-foreground",
+      body:     "text-base text-foreground",
+      caption:  "text-sm font-normal text-muted-foreground",
+      link:     "text-base text-primary underline",
+    },
+  },
+  defaultVariants: {
+    variant: "body",
+  },
+});
 
-interface TextProps extends RNTextProps {
-  variant?: TextVariant;
+export type TextVariant = NonNullable<VariantProps<typeof textVariants>["variant"]>;
+
+interface TextProps extends RNTextProps, VariantProps<typeof textVariants> {
   className?: string;
 }
 
-const variantClasses: Record<TextVariant, string> = {
-  heading:  "text-[28px] font-extrabold text-gray-900 dark:text-gray-100",
-  title:    "text-2xl font-bold text-gray-900 dark:text-gray-100",
-  subtitle: "text-[19px] font-semibold text-gray-900 dark:text-gray-100",
-  body:     "text-base text-gray-900 dark:text-gray-100",
-  caption:  "text-sm font-normal text-gray-500 dark:text-gray-400",
-  link:     "text-base text-blue-500 dark:text-blue-400 underline",
-};
-
 export const Text = forwardRef<RNText, TextProps>(
   ({ variant = "body", className, ...props }, ref) => (
-    <RNText ref={ref} className={cn(variantClasses[variant], className)} {...props} />
+    <RNText ref={ref} className={cn(textVariants({ variant }), className)} {...props} />
   )
 );
 

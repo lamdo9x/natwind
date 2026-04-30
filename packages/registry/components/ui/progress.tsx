@@ -30,14 +30,14 @@ export function Progress({ value, height = 8, className, barClassName, style }: 
 
   return (
     <View
-      className={cn("w-full overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700", className)}
+      className={cn("w-full overflow-hidden rounded-full bg-muted", className)}
       style={[{ height }, style]}
       onLayout={(e) => {
         containerWidth.value = e.nativeEvent.layout.width;
       }}
     >
       <Animated.View
-        className={cn("h-full rounded-full bg-blue-500", barClassName)}
+        className={cn("h-full rounded-full bg-primary", barClassName)}
         style={animatedStyle}
       />
     </View>

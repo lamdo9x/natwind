@@ -67,13 +67,13 @@ export function RadioButton({ option, selected, onPress, disabled = false }: Rad
         className={cn(
           "w-5 h-5 rounded-full border-2 items-center justify-center",
           selected
-            ? "border-blue-500"
-            : "border-gray-300 dark:border-gray-600"
+            ? "border-primary"
+            : "border-border"
         )}
       >
-        {selected && <View className="w-2.5 h-2.5 rounded-full bg-blue-500" />}
+        {selected && <View className="w-2.5 h-2.5 rounded-full bg-primary" />}
       </View>
-      <Text className="text-sm text-gray-900 dark:text-gray-100">{option.label}</Text>
+      <Text className="text-sm text-foreground">{option.label}</Text>
     </TouchableOpacity>
   );
 }

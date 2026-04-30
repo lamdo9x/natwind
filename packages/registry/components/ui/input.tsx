@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { LucideProps } from "lucide-react-native";
-import { useColorScheme } from "nativewind";
+import { useTheme } from "../../theme/theme-provider";
 import { forwardRef, useState } from "react";
 import {
   Pressable,
@@ -54,18 +54,17 @@ export const Input = forwardRef<TextInput, InputProps>(
     ref
   ) => {
     const [isFocused, setIsFocused] = useState(false);
-    const { colorScheme } = useColorScheme();
-    const isDark = colorScheme === "dark";
+    const tokens = useTheme();
 
-    const placeholderColor = isDark ? "#6b7280" : "#9ca3af";
-    const textColor = isDark ? "#f3f4f6" : "#111827";
+    const placeholderColor = tokens.mutedForeground;
+    const textColor = tokens.foreground;
 
     const isTextarea = type === "textarea";
 
     return (
       <View className={cn("gap-1.5 w-full", containerClassName)} style={containerStyle}>
         {label && (
-          <Text className="text-sm font-medium text-gray-700 dark:text-gray-300">{label}</Text>
+          <Text className="text-sm font-medium text-foreground">{label}</Text>
         )}
 
         <View
@@ -73,18 +72,18 @@ export const Input = forwardRef<TextInput, InputProps>(
             "flex-row items-center rounded-xl px-3",
             isTextarea ? "items-start py-3" : "h-12",
             variant === "filled"
-              ? "bg-gray-100 dark:bg-gray-800"
-              : "border border-gray-200 dark:border-gray-700 bg-transparent",
-            isFocused && variant === "filled"  && "bg-gray-200 dark:bg-gray-700",
-            isFocused && variant === "outline" && "border-blue-500 dark:border-blue-400",
-            error  && "border border-red-500 dark:border-red-400",
+              ? "bg-muted"
+              : "border border-border bg-transparent",
+            isFocused && variant === "filled"  && "opacity-80",
+            isFocused && variant === "outline" && "border-ring",
+            error  && "border border-destructive",
             disabled && "opacity-50"
           )}
         >
           {IconComponent && (
             <IconComponent
               size={18}
-              color={isDark ? "#9ca3af" : "#6b7280"}
+              color={tokens.mutedForeground}
               style={{ marginRight: 8 }}
             />
           )}
@@ -113,8 +112,8 @@ export const Input = forwardRef<TextInput, InputProps>(
           )}
         </View>
 
-        {error && <Text className="text-xs text-red-500 dark:text-red-400">{error}</Text>}
-        {hint && !error && <Text className="text-xs text-gray-500 dark:text-gray-400">{hint}</Text>}
+        {error && <Text className="text-xs text-destructive">{error}</Text>}
+        {hint && !error && <Text className="text-xs text-muted-foreground">{hint}</Text>}
       </View>
     );
   }

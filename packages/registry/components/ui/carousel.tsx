@@ -1,15 +1,13 @@
 import { cn } from "@/lib/utils";
 import { useCallback, useRef, useState } from "react";
 import {
-  Dimensions,
   FlatList,
+  LayoutChangeEvent,
   Pressable,
   View,
   ViewStyle,
   ViewToken,
 } from "react-native";
-
-const { width: SCREEN_WIDTH } = Dimensions.get("window");
 
 export interface CarouselProps {
   data: React.ReactNode[];
@@ -38,9 +36,14 @@ export function Carousel({
   className,
   style,
 }: CarouselProps) {
-  const width = itemWidth ?? SCREEN_WIDTH;
+  const [containerWidth, setContainerWidth] = useState(0);
+  const width = itemWidth ?? containerWidth;
   const [activeIndex, setActiveIndex] = useState(0);
   const listRef = useRef<FlatList>(null);
+
+  const onLayout = useCallback((e: LayoutChangeEvent) => {
+    setContainerWidth(e.nativeEvent.layout.width);
+  }, []);
 
   const onViewableItemsChanged = useRef(
     ({ viewableItems }: { viewableItems: ViewToken[] }) => {
@@ -72,9 +75,9 @@ export function Carousel({
   }, [activeIndex, data.length, loop, scrollTo]);
 
   return (
-    <View className={cn("", className)} style={style}>
+    <View className={cn("", className)} style={style} onLayout={onLayout}>
       <View>
-        <FlatList
+        {width > 0 && <FlatList
           ref={listRef}
           data={data}
           horizontal
@@ -89,7 +92,7 @@ export function Carousel({
           renderItem={({ item }) => (
             <View style={{ width }}>{item}</View>
           )}
-        />
+        />}
 
         {showArrows && (
           <>
@@ -97,21 +100,21 @@ export function Carousel({
               onPress={prev}
               disabled={!loop && activeIndex === 0}
               className={cn(
-                "absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/80 dark:bg-gray-800/80 items-center justify-center shadow",
+                "absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-background/80 items-center justify-center shadow",
                 !loop && activeIndex === 0 && "opacity-30"
               )}
             >
-              <View className="w-2 h-2 border-l-2 border-b-2 border-gray-700 dark:border-gray-200 rotate-45 ml-1" />
+              <View className="w-2 h-2 border-l-2 border-b-2 border-foreground rotate-45 ml-1" />
             </Pressable>
             <Pressable
               onPress={next}
               disabled={!loop && activeIndex === data.length - 1}
               className={cn(
-                "absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/80 dark:bg-gray-800/80 items-center justify-center shadow",
+                "absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-background/80 items-center justify-center shadow",
                 !loop && activeIndex === data.length - 1 && "opacity-30"
               )}
             >
-              <View className="w-2 h-2 border-r-2 border-t-2 border-gray-700 dark:border-gray-200 rotate-45 mr-1" />
+              <View className="w-2 h-2 border-r-2 border-t-2 border-foreground rotate-45 mr-1" />
             </Pressable>
           </>
         )}
@@ -125,8 +128,8 @@ export function Carousel({
                 className={cn(
                   "rounded-full transition-all",
                   i === activeIndex
-                    ? cn("w-5 h-2 bg-blue-500", activeDotClassName)
-                    : cn("w-2 h-2 bg-gray-300 dark:bg-gray-600", dotClassName)
+                    ? cn("w-5 h-2 bg-primary", activeDotClassName)
+                    : cn("w-2 h-2 bg-border", dotClassName)
                 )}
               />
             </Pressable>

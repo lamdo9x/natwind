@@ -81,16 +81,16 @@ export function ActionSheet({
         </Animated.View>
 
         <Animated.View style={[sheetStyle, style]}>
-          <View className="mx-4 mb-2 rounded-2xl overflow-hidden bg-white dark:bg-gray-800">
+          <View className="mx-4 mb-2 rounded-2xl overflow-hidden bg-background">
             {(title || message) && (
-              <View className="px-4 pt-4 pb-3 items-center border-b border-gray-100 dark:border-gray-700">
+              <View className="px-4 pt-4 pb-3 items-center border-b border-border">
                 {title && (
-                  <Text className="text-sm font-semibold text-gray-900 dark:text-gray-100 text-center">
+                  <Text className="text-sm font-semibold text-foreground text-center">
                     {title}
                   </Text>
                 )}
                 {message && (
-                  <Text className="text-xs text-gray-500 dark:text-gray-400 text-center mt-1">
+                  <Text className="text-xs text-muted-foreground text-center mt-1">
                     {message}
                   </Text>
                 )}
@@ -110,7 +110,7 @@ export function ActionSheet({
                 className={cn(
                   "px-4 py-4 items-center justify-center",
                   index < mainActions.length - 1 &&
-                    "border-b border-gray-100 dark:border-gray-700",
+                    "border-b border-border",
                   action.disabled && "opacity-40"
                 )}
               >
@@ -118,8 +118,8 @@ export function ActionSheet({
                   className={cn(
                     "text-base",
                     action.variant === "destructive"
-                      ? "text-red-500 dark:text-red-400"
-                      : "text-blue-500"
+                      ? "text-destructive"
+                      : "text-primary"
                   )}
                 >
                   {action.label}
@@ -134,9 +134,9 @@ export function ActionSheet({
                 cancelAction.onPress();
                 dismiss();
               }}
-              className="mx-4 mb-8 rounded-2xl bg-white dark:bg-gray-800 py-4 items-center"
+              className="mx-4 mb-8 rounded-2xl bg-background py-4 items-center"
             >
-              <Text className="text-base font-semibold text-blue-500">
+              <Text className="text-base font-semibold text-primary">
                 {cancelAction.label}
               </Text>
             </Pressable>

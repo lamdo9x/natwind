@@ -38,19 +38,19 @@ interface ToastContextType {
 const ToastContext = createContext<ToastContextType | null>(null);
 
 const variantBg: Record<ToastVariant, string> = {
-  default: "bg-gray-900 dark:bg-gray-100",
-  success: "bg-green-500",
-  error: "bg-red-500",
-  warning: "bg-amber-500",
-  info: "bg-blue-500",
+  default: "bg-foreground",
+  success: "bg-success",
+  error:   "bg-destructive",
+  warning: "bg-warning",
+  info:    "bg-info",
 };
 
 const variantText: Record<ToastVariant, string> = {
-  default: "text-white dark:text-gray-900",
-  success: "text-white",
-  error: "text-white",
-  warning: "text-white",
-  info: "text-white",
+  default: "text-background",
+  success: "text-success-foreground",
+  error:   "text-destructive-foreground",
+  warning: "text-warning-foreground",
+  info:    "text-info-foreground",
 };
 
 interface ToastItemProps {
@@ -83,8 +83,6 @@ function ToastItem({ item, onDismiss }: ToastItemProps) {
     opacity: opacity.value,
   }));
 
-  const iconColor = variant === "default" ? "#ffffff" : "#ffffff";
-
   return (
     <Animated.View
       style={animStyle}
@@ -106,7 +104,7 @@ function ToastItem({ item, onDismiss }: ToastItemProps) {
         )}
       </View>
       <Pressable onPress={dismiss} hitSlop={8}>
-        <X size={16} color={iconColor} />
+        <X size={16} color="#ffffff" />
       </Pressable>
     </Animated.View>
   );
