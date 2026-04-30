@@ -2,6 +2,7 @@ import { router } from "expo-router";
 import { ChevronRight } from "lucide-react-native";
 import { Pressable, SectionList, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useTheme } from "@rn-ui/registry";
 
 const SECTIONS = [
   {
@@ -158,13 +159,14 @@ function formatTitle(name: string): string {
 }
 
 export default function ComponentGallery() {
+  const tokens = useTheme();
   return (
-    <SafeAreaView className="flex-1 bg-white dark:bg-gray-950">
+    <SafeAreaView className="flex-1 bg-background">
       <View className="px-4 pt-6 pb-3">
-        <Text className="text-2xl font-bold text-gray-900 dark:text-white">
+        <Text className="text-2xl font-bold text-foreground">
           rn-ui
         </Text>
-        <Text className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+        <Text className="text-sm text-muted-foreground mt-1">
           52 components · Expo + NativeWind
         </Text>
       </View>
@@ -175,7 +177,7 @@ export default function ComponentGallery() {
         stickySectionHeadersEnabled={false}
         renderSectionHeader={({ section }) => (
           <View className="px-4 pt-5 pb-1.5">
-            <Text className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-widest">
+            <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-widest">
               {section.title}
             </Text>
           </View>
@@ -186,7 +188,7 @@ export default function ComponentGallery() {
           return (
             <Pressable
               onPress={() => router.push(`/component/${item}` as any)}
-              className="flex-row items-center px-4 py-3 bg-white dark:bg-gray-950 active:bg-gray-50 dark:active:bg-gray-900"
+              className="flex-row items-center px-4 py-3 bg-background active:bg-muted"
               style={{
                 borderTopLeftRadius: isFirst ? 12 : 0,
                 borderTopRightRadius: isFirst ? 12 : 0,
@@ -195,19 +197,19 @@ export default function ComponentGallery() {
               }}
             >
               <View className="flex-1">
-                <Text className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                <Text className="text-sm font-medium text-foreground">
                   {formatTitle(item)}
                 </Text>
                 {DESCRIPTIONS[item] && (
                   <Text
-                    className="text-xs text-gray-400 dark:text-gray-500 mt-0.5"
+                    className="text-xs text-muted-foreground mt-0.5"
                     numberOfLines={1}
                   >
                     {DESCRIPTIONS[item]}
                   </Text>
                 )}
               </View>
-              <ChevronRight size={15} color="#9ca3af" />
+              <ChevronRight size={15} color={tokens.mutedForeground} />
             </Pressable>
           );
         }}

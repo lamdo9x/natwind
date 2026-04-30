@@ -103,6 +103,7 @@ import {
   useAlertDialog,
   useBottomSheet,
   useSheet,
+  useTheme,
   useToast,
 } from "@rn-ui/registry";
 
@@ -118,6 +119,7 @@ function DemoSection({
   title?: string;
   children: React.ReactNode;
 }) {
+  const tokens = useTheme();
   return (
     <RNView style={{ marginBottom: 24 }}>
       {title && (
@@ -125,7 +127,7 @@ function DemoSection({
           style={{
             fontSize: 11,
             fontWeight: "600",
-            color: "#9ca3af",
+            color: tokens.mutedForeground,
             textTransform: "uppercase",
             letterSpacing: 1,
             marginBottom: 10,
@@ -148,7 +150,7 @@ function AccordionDemo() {
         <AccordionItem value="a">
           <AccordionTrigger>What is rn-ui?</AccordionTrigger>
           <AccordionContent>
-            <RNText style={{ fontSize: 14, color: "#6b7280" }}>
+            <RNText className="text-sm text-muted-foreground">
               A shadcn-style CLI component library for Expo + NativeWind.
             </RNText>
           </AccordionContent>
@@ -156,7 +158,7 @@ function AccordionDemo() {
         <AccordionItem value="b">
           <AccordionTrigger>How does installation work?</AccordionTrigger>
           <AccordionContent>
-            <RNText style={{ fontSize: 14, color: "#6b7280" }}>
+            <RNText className="text-sm text-muted-foreground">
               Run npx @rn-ui/cli add button and the component is copied into
               your project.
             </RNText>
@@ -165,7 +167,7 @@ function AccordionDemo() {
         <AccordionItem value="c">
           <AccordionTrigger>Does it require shadcn?</AccordionTrigger>
           <AccordionContent>
-            <RNText style={{ fontSize: 14, color: "#6b7280" }}>
+            <RNText className="text-sm text-muted-foreground">
               No — it's inspired by shadcn/ui but built natively for React
               Native.
             </RNText>
@@ -225,7 +227,7 @@ function AvatarDemo() {
         <Avatar size={48}>
           <AvatarImage source={{ uri: "https://i.pravatar.cc/150?img=1" }} />
           <AvatarFallback>
-            <RNText style={{ fontSize: 16, fontWeight: "600", color: "#6b7280" }}>
+            <RNText className="text-base font-semibold text-muted-foreground">
               AB
             </RNText>
           </AvatarFallback>
@@ -233,14 +235,14 @@ function AvatarDemo() {
         <Avatar size={48}>
           <AvatarImage source={{ uri: "https://invalid.url/no-image" }} />
           <AvatarFallback>
-            <RNText style={{ fontSize: 16, fontWeight: "600", color: "#6b7280" }}>
+            <RNText className="text-base font-semibold text-muted-foreground">
               JD
             </RNText>
           </AvatarFallback>
         </Avatar>
         <Avatar size={64}>
           <AvatarFallback>
-            <RNText style={{ fontSize: 20, fontWeight: "600", color: "#6b7280" }}>
+            <RNText className="text-xl font-semibold text-muted-foreground">
               LG
             </RNText>
           </AvatarFallback>
@@ -254,7 +256,7 @@ function AvoidKeyboardDemo() {
   return (
     <>
       <DemoSection title="Usage">
-        <RNText style={{ fontSize: 14, color: "#6b7280", lineHeight: 20 }}>
+        <RNText className="text-sm text-muted-foreground leading-5">
           Place AvoidKeyboard at the bottom of a screen. It grows to match the
           keyboard height using Reanimated — preventing content from being
           hidden.
@@ -331,7 +333,7 @@ function CardDemo() {
           <CardDescription>A short description goes here.</CardDescription>
         </CardHeader>
         <CardContent>
-          <RNText style={{ fontSize: 14, color: "#6b7280" }}>
+          <RNText className="text-sm text-muted-foreground">
             Card content renders any children here. Use it for stats, media, or
             form fields.
           </RNText>
@@ -411,13 +413,13 @@ function CollapsibleDemo() {
   return (
     <DemoSection title="Show / hide">
       <Collapsible title="Installation">
-        <RNText style={{ fontSize: 14, color: "#6b7280", lineHeight: 20 }}>
+        <RNText className="text-sm text-muted-foreground leading-5">
           Run npx @rn-ui/cli add collapsible to copy this component into your
           project.
         </RNText>
       </Collapsible>
       <Collapsible title="Usage">
-        <RNText style={{ fontSize: 14, color: "#6b7280", lineHeight: 20 }}>
+        <RNText className="text-sm text-muted-foreground leading-5">
           Wrap any content in Collapsible and give it a title prop.
         </RNText>
       </Collapsible>
@@ -492,7 +494,7 @@ function ImageDemo() {
       <DemoSection title="Error state (fallback)">
         <UIImage
           source={{ uri: "https://invalid.url/broken-image" }}
-          containerClassName="rounded-xl bg-gray-100"
+          containerClassName="rounded-xl bg-muted"
           containerStyle={{ height: 100 }}
           errorText="Image failed to load"
         />
@@ -540,7 +542,7 @@ function InputOTPDemo() {
         onChangeText={setCode}
         onComplete={(v: string) => console.log("OTP complete:", v)}
       />
-      <RNText style={{ fontSize: 13, color: "#9ca3af", marginTop: 8 }}>
+      <RNText className="text-xs text-muted-foreground mt-2">
         Value: {code || "—"}
       </RNText>
     </DemoSection>
@@ -583,7 +585,7 @@ function OnboardingDemo() {
             Welcome
           </RNText>
           <RNText
-            style={{ fontSize: 16, color: "#6b7280", textAlign: "center" }}
+            className="text-base text-muted-foreground text-center"
           >
             rn-ui gives you beautiful, copy-paste components for Expo.
           </RNText>
@@ -605,7 +607,7 @@ function OnboardingDemo() {
             Install
           </RNText>
           <RNText
-            style={{ fontSize: 16, color: "#6b7280", textAlign: "center" }}
+            className="text-base text-muted-foreground text-center"
           >
             npx @rn-ui/cli add button — and the component lands in your project.
           </RNText>
@@ -627,7 +629,7 @@ function OnboardingDemo() {
             Build
           </RNText>
           <RNText
-            style={{ fontSize: 16, color: "#6b7280", textAlign: "center" }}
+            className="text-base text-muted-foreground text-center"
           >
             Customize freely — you own the code.
           </RNText>
@@ -678,14 +680,12 @@ function PopoverDemo() {
         </PopoverTrigger>
         <PopoverContent>
           <PopoverHeader>
-            <RNText
-              style={{ fontSize: 15, fontWeight: "600", color: "#111827" }}
-            >
+            <Text className="text-base font-semibold text-foreground">
               Settings
-            </RNText>
+            </Text>
           </PopoverHeader>
           <PopoverBody>
-            <RNText style={{ fontSize: 14, color: "#6b7280" }}>
+            <RNText className="text-sm text-muted-foreground">
               Popover content goes here. It measures the trigger position and
               auto-flips if needed.
             </RNText>
@@ -721,7 +721,7 @@ function ProgressDemo() {
           +10
         </Button>
       </RNView>
-      <RNText style={{ fontSize: 13, color: "#9ca3af", textAlign: "center" }}>
+      <RNText className="text-xs text-muted-foreground text-center">
         {value}%
       </RNText>
     </DemoSection>
@@ -742,7 +742,7 @@ function RadioDemo() {
           { label: "Disabled option", value: "disabled", disabled: true },
         ]}
       />
-      <RNText style={{ fontSize: 13, color: "#9ca3af", marginTop: 8 }}>
+      <RNText className="text-xs text-muted-foreground mt-2">
         Selected: {value}
       </RNText>
     </DemoSection>
@@ -750,15 +750,16 @@ function RadioDemo() {
 }
 
 function ScrollViewDemo() {
+  const tokens = useTheme();
   return (
     <DemoSection title="Transparent bg wrapper">
       <UIScrollView
-        style={{ maxHeight: 120, backgroundColor: "#f3f4f6", borderRadius: 8 }}
+        style={{ maxHeight: 120, backgroundColor: tokens.muted, borderRadius: 8 }}
       >
         {Array.from({ length: 10 }, (_, i) => (
           <RNText
             key={i}
-            style={{ padding: 8, fontSize: 14, color: "#374151" }}
+            style={{ padding: 8, fontSize: 14, color: tokens.foreground }}
           >
             Row {i + 1}
           </RNText>
@@ -778,7 +779,7 @@ function SearchBarDemo() {
         placeholder="Search components..."
         debounceMs={300}
       />
-      <RNText style={{ fontSize: 13, color: "#9ca3af" }}>
+      <RNText className="text-xs text-muted-foreground">
         Query: {query || "—"}
       </RNText>
     </DemoSection>
@@ -793,9 +794,9 @@ function SeparatorDemo() {
       </DemoSection>
       <DemoSection title="Vertical (inside a row)">
         <RNView style={{ flexDirection: "row", height: 40, alignItems: "center", gap: 12 }}>
-          <RNText style={{ fontSize: 14, color: "#374151" }}>Left</RNText>
+          <Text className="text-sm text-foreground">Left</Text>
           <Separator orientation="vertical" />
-          <RNText style={{ fontSize: 14, color: "#374151" }}>Right</RNText>
+          <Text className="text-sm text-foreground">Right</Text>
         </RNView>
       </DemoSection>
     </>
@@ -838,7 +839,7 @@ function BottomSheetDemo() {
         showCloseButton
       >
         <RNView style={{ padding: 16, gap: 12 }}>
-          <RNText style={{ fontSize: 14, color: "#6b7280" }}>
+          <RNText className="text-sm text-muted-foreground">
             Drag the handle to snap between 40% and 75% height. Drag down to
             dismiss.
           </RNText>
@@ -908,7 +909,7 @@ function SpinnerDemo() {
         {(["default", "circle", "dots", "pulse", "bars"] as const).map((v) => (
           <RNView key={v} style={{ alignItems: "center", gap: 6 }}>
             <Spinner variant={v} />
-            <RNText style={{ fontSize: 11, color: "#9ca3af" }}>{v}</RNText>
+            <RNText className="text-muted-foreground" style={{ fontSize: 11 }}>{v}</RNText>
           </RNView>
         ))}
       </RNView>
@@ -968,17 +969,17 @@ function TabsDemo() {
           <TabsTrigger value="docs">Docs</TabsTrigger>
         </TabsList>
         <TabsContent value="preview">
-          <RNText style={{ fontSize: 14, color: "#6b7280", padding: 12 }}>
+          <RNText className="text-sm text-muted-foreground p-3">
             Live component preview renders here.
           </RNText>
         </TabsContent>
         <TabsContent value="code">
-          <RNText style={{ fontSize: 14, color: "#6b7280", padding: 12 }}>
+          <RNText className="text-sm text-muted-foreground p-3">
             {"<Tabs defaultValue=\"preview\">\n  <TabsTrigger>...</TabsTrigger>\n</Tabs>"}
           </RNText>
         </TabsContent>
         <TabsContent value="docs">
-          <RNText style={{ fontSize: 14, color: "#6b7280", padding: 12 }}>
+          <RNText className="text-sm text-muted-foreground p-3">
             API reference and prop descriptions.
           </RNText>
         </TabsContent>
@@ -1068,11 +1069,11 @@ function ToastDemo() {
 function ViewDemo() {
   return (
     <DemoSection title="Transparent background wrapper">
-      <RNText style={{ fontSize: 14, color: "#6b7280", marginBottom: 12 }}>
+      <RNText className="text-sm text-muted-foreground mb-3">
         UIView prevents the white flash on dark mode by defaulting to
         transparent background instead of white.
       </RNText>
-      <UIView className="p-4 rounded-xl border border-gray-200 dark:border-gray-700">
+      <UIView className="p-4 rounded-xl border border-border">
         <RNText style={{ fontSize: 14 }}>Content inside UIView</RNText>
       </UIView>
     </DemoSection>
@@ -1110,8 +1111,7 @@ function AudioPlayerDemo() {
   return (
     <DemoSection title="Remote audio">
       <AudioPlayer
-        uri="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-        title="SoundHelix Song 1"
+        source={{ uri: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" }}
         showWaveform
       />
     </DemoSection>
@@ -1213,7 +1213,7 @@ function HelloWaveDemo() {
         <HelloWave size="md" />
         <HelloWave size="lg" />
       </RNView>
-      <RNText style={{ fontSize: 13, color: "#9ca3af", marginTop: 8 }}>
+      <RNText className="text-xs text-muted-foreground mt-2">
         sm / md / lg — repeats the wave animation 4 times
       </RNText>
     </DemoSection>
@@ -1235,12 +1235,12 @@ function ParallaxScrollViewDemo() {
           }
         >
           {Array.from({ length: 8 }, (_, i) => (
-            <RNText
+            <Text
               key={i}
-              style={{ padding: 16, fontSize: 14, color: "#374151", borderBottomWidth: 1, borderBottomColor: "#f3f4f6" }}
+              className="text-sm text-foreground px-4 py-4 border-b border-border"
             >
               Row {i + 1} — scroll up to see parallax effect
-            </RNText>
+            </Text>
           ))}
         </ParallaxScrollView>
       </RNView>
@@ -1306,9 +1306,9 @@ function CameraPreviewDemo() {
     <DemoSection title="Photo review actions">
       {confirmed ? (
         <RNView style={{ alignItems: "center", gap: 12 }}>
-          <RNText style={{ fontSize: 14, color: "#10b981", fontWeight: "600" }}>
+          <Text className="text-sm font-semibold text-success">
             Photo confirmed!
-          </RNText>
+          </Text>
           <Button variant="outline" size="sm" onPress={() => setConfirmed(false)}>
             Reset
           </Button>
@@ -1343,7 +1343,7 @@ function ColorPickerDemo() {
           backgroundColor: color,
         }}
       />
-      <RNText style={{ fontSize: 13, color: "#9ca3af", marginTop: 4, textAlign: "center" }}>
+      <RNText className="text-xs text-muted-foreground text-center mt-1">
         Selected: {color}
       </RNText>
     </DemoSection>
@@ -1462,8 +1462,9 @@ export default function ComponentScreen() {
   const { name } = useLocalSearchParams<{ name: string }>();
   const Demo = name ? DEMOS[name] : null;
 
+  const tokens = useTheme();
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }} edges={["bottom"]}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: tokens.background }} edges={["bottom"]}>
       {Demo ? (
         <ScrollView
           style={{ flex: 1 }}
@@ -1474,7 +1475,7 @@ export default function ComponentScreen() {
         </ScrollView>
       ) : (
         <RNView style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-          <RNText style={{ color: "#9ca3af" }}>Demo not found: {name}</RNText>
+          <RNText style={{ color: tokens.mutedForeground }}>Demo not found: {name}</RNText>
         </RNView>
       )}
     </SafeAreaView>
