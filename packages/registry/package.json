@@ -11,7 +11,9 @@
     "react": "*",
     "react-native": "*",
     "nativewind": "*",
+    "class-variance-authority": "*",
     "clsx": "*",
-    "tailwind-merge": "*"
+    "tailwind-merge": "*",
+    "expo-audio": "*"
   }
 }

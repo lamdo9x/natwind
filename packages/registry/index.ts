@@ -82,3 +82,4 @@ export { CameraComponent } from "./components/ui/camera";
 export { CameraPreview } from "./components/ui/camera-preview";
 export { ColorPicker } from "./components/ui/color-picker";
 export { VideoPlayer } from "./components/ui/video";
+export { useTheme } from "./theme/theme-provider";
