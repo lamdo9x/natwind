@@ -26,10 +26,10 @@ export function init() {
     console.log(chalk.yellow("⚠ lib/utils.ts already exists, skipping."));
   }
 
-  // Install clsx + tailwind-merge
+  // Install dependencies
   const pm = detectPackageManager(cwd);
-  const cmd = installCommand(pm, ["clsx", "tailwind-merge"]);
-  console.log(chalk.dim("  Installing clsx and tailwind-merge..."));
+  const cmd = installCommand(pm, ["clsx", "tailwind-merge", "class-variance-authority"]);
+  console.log(chalk.dim("  Installing clsx, tailwind-merge, class-variance-authority..."));
   execSync(cmd, { stdio: "inherit", cwd });
 
   console.log(chalk.green("\n✔ rn-ui initialized."));
