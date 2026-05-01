@@ -10,12 +10,15 @@ Components are **copied into your project**, not installed as a package. You own
 → Follow the [NativeWind install guide](https://www.nativewind.dev/docs/getting-started/installation)
 
 **2. Initialize rn-ui**
+
 ```bash
 npx @rn-ui/cli init
 ```
+
 This creates `lib/utils.ts` (the `cn()` helper) and installs `clsx`, `tailwind-merge`, and `class-variance-authority`.
 
 **3. Add components**
+
 ```bash
 npx @rn-ui/cli add button
 npx @rn-ui/cli add input
@@ -23,6 +26,7 @@ npx @rn-ui/cli add card
 ```
 
 **4. Use them**
+
 ```tsx
 import { Button } from "@/components/ui/button";
 
@@ -33,76 +37,82 @@ import { Button } from "@/components/ui/button";
 ## Available components
 
 ### Layout & Primitives
-| Component | Description |
-|-----------|-------------|
-| `view` | Themed View wrapper |
-| `text` | Themed Text wrapper |
-| `scroll-view` | Themed ScrollView wrapper |
-| `separator` | Horizontal/vertical divider |
-| `card` | Surface container with header/content/footer slots |
-| `image` | Expo Image with NativeWind support |
-| `icon` | Lucide icon wrapper |
+
+| Component     | Description                                        |
+| ------------- | -------------------------------------------------- |
+| `view`        | Themed View wrapper                                |
+| `text`        | Themed Text wrapper                                |
+| `scroll-view` | Themed ScrollView wrapper                          |
+| `separator`   | Horizontal/vertical divider                        |
+| `card`        | Surface container with header/content/footer slots |
+| `image`       | Expo Image with NativeWind support                 |
+| `icon`        | Lucide icon wrapper                                |
 
 ### Inputs & Forms
-| Component | Description |
-|-----------|-------------|
-| `button` | Pressable button — 4 variants, 3 sizes |
-| `input` | Text input field |
-| `input-otp` | OTP/PIN code input |
-| `checkbox` | Checkbox with label |
-| `radio` | Radio group and item |
-| `switch` | Toggle switch |
-| `toggle` | Single toggle button |
-| `picker` | Native dropdown picker |
-| `combobox` | Searchable select with autocomplete |
-| `date-picker` | Date/time picker |
-| `color-picker` | HSV color picker |
-| `searchbar` | Search input with clear button |
+
+| Component      | Description                            |
+| -------------- | -------------------------------------- |
+| `button`       | Pressable button — 4 variants, 3 sizes |
+| `input`        | Text input field                       |
+| `input-otp`    | OTP/PIN code input                     |
+| `checkbox`     | Checkbox with label                    |
+| `radio`        | Radio group and item                   |
+| `switch`       | Toggle switch                          |
+| `toggle`       | Single toggle button                   |
+| `picker`       | Native dropdown picker                 |
+| `combobox`     | Searchable select with autocomplete    |
+| `date-picker`  | Date/time picker                       |
+| `color-picker` | HSV color picker                       |
+| `searchbar`    | Search input with clear button         |
 
 ### Feedback & Overlays
-| Component | Description |
-|-----------|-------------|
-| `alert` | Inline alert with icon variants |
-| `alert-dialog` | Modal confirmation dialog |
-| `badge` | Status badge — 4 variants |
-| `progress` | Progress bar |
-| `skeleton` | Loading skeleton placeholder |
-| `spinner` | Activity indicator |
-| `popover` | Floating content popover |
-| `sheet` | Bottom/side sheet drawer |
-| `bottom-sheet` | Full-featured bottom sheet |
-| `action-sheet` | iOS-style action sheet |
+
+| Component      | Description                     |
+| -------------- | ------------------------------- |
+| `alert`        | Inline alert with icon variants |
+| `alert-dialog` | Modal confirmation dialog       |
+| `badge`        | Status badge — 4 variants       |
+| `progress`     | Progress bar                    |
+| `skeleton`     | Loading skeleton placeholder    |
+| `spinner`      | Activity indicator              |
+| `popover`      | Floating content popover        |
+| `sheet`        | Bottom/side sheet drawer        |
+| `bottom-sheet` | Full-featured bottom sheet      |
+| `action-sheet` | iOS-style action sheet          |
 
 ### Navigation & Structure
-| Component | Description |
-|-----------|-------------|
-| `tabs` | Tab bar with content panels |
-| `accordion` | Expandable/collapsible sections |
-| `collapsible` | Single expand/collapse section |
-| `link` | Expo Router link wrapper |
-| `table` | Data table |
+
+| Component     | Description                     |
+| ------------- | ------------------------------- |
+| `tabs`        | Tab bar with content panels     |
+| `accordion`   | Expandable/collapsible sections |
+| `collapsible` | Single expand/collapse section  |
+| `link`        | Expo Router link wrapper        |
+| `table`       | Data table                      |
 
 ### Media & Advanced
-| Component | Description |
-|-----------|-------------|
-| `avatar` | User avatar with fallback initials |
-| `camera` | Camera capture view |
-| `camera-preview` | Preview captured photo/video |
-| `audio-player` | Audio playback control |
-| `audio-recorder` | Audio recording control |
-| `audio-waveform` | Waveform visualizer |
-| `gallery` | Photo gallery viewer |
-| `media-picker` | Image/video picker from library |
-| `file-picker` | Document/file picker |
-| `carousel` | Horizontal swipe carousel |
-| `parallax-scrollview` | ScrollView with parallax header |
+
+| Component             | Description                        |
+| --------------------- | ---------------------------------- |
+| `avatar`              | User avatar with fallback initials |
+| `camera`              | Camera capture view                |
+| `camera-preview`      | Preview captured photo/video       |
+| `audio-player`        | Audio playback control             |
+| `audio-recorder`      | Audio recording control            |
+| `audio-waveform`      | Waveform visualizer                |
+| `gallery`             | Photo gallery viewer               |
+| `media-picker`        | Image/video picker from library    |
+| `file-picker`         | Document/file picker               |
+| `carousel`            | Horizontal swipe carousel          |
+| `parallax-scrollview` | ScrollView with parallax header    |
 
 ### Utilities
-| Component | Description |
-|-----------|-------------|
-| `mode-toggle` | Light/dark/system theme toggle |
-| `avoid-keyboard` | KeyboardAvoidingView wrapper |
-| `onboarding` | Multi-step onboarding flow |
+
+| Component        | Description                    |
+| ---------------- | ------------------------------ |
+| `mode-toggle`    | Light/dark/system theme toggle |
+| `avoid-keyboard` | KeyboardAvoidingView wrapper   |
+| `onboarding`     | Multi-step onboarding flow     |
 
 ## Theming
 
@@ -123,11 +133,7 @@ Wrap your app with `ThemeProvider` to enable theme context:
 import { ThemeProvider } from "@/components/ui/theme-provider";
 
 export default function RootLayout() {
-  return (
-    <ThemeProvider>
-      {/* your app */}
-    </ThemeProvider>
-  );
+  return <ThemeProvider>{/* your app */}</ThemeProvider>;
 }
 ```
 
@@ -138,10 +144,10 @@ export default function RootLayout() {
 ```tsx
 <Button
   variant="default" // "default" | "outline" | "ghost" | "destructive"
-  size="md"         // "sm" | "md" | "lg"
+  size="md" // "sm" | "md" | "lg"
   disabled={false}
-  className=""      // NativeWind className (override)
-  style={{}}        // StyleSheet escape hatch (Reanimated, computed values)
+  className="" // NativeWind className (override)
+  style={{}} // StyleSheet escape hatch (Reanimated, computed values)
   onPress={() => {}}
 >
   Label
@@ -163,7 +169,7 @@ Existing options didn't quite fit:
 - **[bna/ui](https://ui.ahmedbna.com/)** — great component selection, but no NativeWind support
 - **[React Native Reusables](https://reactnativereusables.com/)** — shadcn-style copy-paste, but limited component coverage
 
-rn-ui fills the gap: shadcn's copy-paste model, NativeWind-first styling, and enough components to cover a real app.
+rn-ui fills the gap: shadcn's copy-paste model, NativeWind-first styling, and enough components to cover a real app. Components were converted from bna/ui to NativeWind with the help of Claude Code.
 
 ## Design principles
 
