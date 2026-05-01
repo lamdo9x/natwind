@@ -1,14 +1,14 @@
 {
-  "name": "rn-ui-monorepo",
+  "name": "natwind-monorepo",
   "private": true,
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
   "scripts": {
-    "demo": "pnpm --filter @rn-ui/demo start",
-    "demo:ios": "pnpm --filter @rn-ui/demo ios",
-    "demo:android": "pnpm --filter @rn-ui/demo android"
+    "demo": "pnpm --filter @natwind/demo start",
+    "demo:ios": "pnpm --filter @natwind/demo ios",
+    "demo:android": "pnpm --filter @natwind/demo android"
   },
   "packageManager": "pnpm@9.0.0"
 }

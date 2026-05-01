@@ -1,5 +1,5 @@
 const GITHUB_RAW =
-  "https://raw.githubusercontent.com/lamdo9x/rn-ui/main/packages/registry";
+  "https://raw.githubusercontent.com/lamdo9x/natwind/main/packages/registry";
 
 export interface RegistryEntry {
   name: string;

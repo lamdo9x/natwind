@@ -1,4 +1,4 @@
-# rn-ui
+# natwind
 
 A copy-paste component library for Expo (React Native) projects — styled with NativeWind, inspired by shadcn/ui.
 
@@ -9,10 +9,10 @@ Components are **copied into your project**, not installed as a package. You own
 **1. Set up NativeWind in your project** (if not already done)
 → Follow the [NativeWind install guide](https://www.nativewind.dev/docs/getting-started/installation)
 
-**2. Initialize rn-ui**
+**2. Initialize natwind**
 
 ```bash
-npx @rn-ui/cli init
+npx natwind init
 ```
 
 This creates `lib/utils.ts` (the `cn()` helper) and installs `clsx`, `tailwind-merge`, and `class-variance-authority`.
@@ -20,9 +20,9 @@ This creates `lib/utils.ts` (the `cn()` helper) and installs `clsx`, `tailwind-m
 **3. Add components**
 
 ```bash
-npx @rn-ui/cli add button
-npx @rn-ui/cli add input
-npx @rn-ui/cli add card
+npx natwind add button
+npx natwind add input
+npx natwind add card
 ```
 
 **4. Use them**
@@ -157,19 +157,19 @@ export default function RootLayout() {
 ## CLI commands
 
 ```bash
-npx @rn-ui/cli init              # set up lib/utils.ts + install deps
-npx @rn-ui/cli add <component>   # copy component into your project
-npx @rn-ui/cli list              # list all available components
+npx natwind init              # set up lib/utils.ts + install deps
+npx natwind add <component>   # copy component into your project
+npx natwind list              # list all available components
 ```
 
-## Why rn-ui?
+## Why natwind?
 
 Existing options didn't quite fit:
 
 - **[bna/ui](https://ui.ahmedbna.com/)** — great component selection, but no NativeWind support
 - **[React Native Reusables](https://reactnativereusables.com/)** — shadcn-style copy-paste, but limited component coverage
 
-rn-ui fills the gap: shadcn's copy-paste model, NativeWind-first styling, and enough components to cover a real app. Components were converted from bna/ui to NativeWind with the help of Claude Code.
+natwind fills the gap: shadcn's copy-paste model, NativeWind-first styling, and enough components to cover a real app. Components were converted from bna/ui to NativeWind with the help of Claude Code.
 
 ## Design principles
 
@@ -181,11 +181,11 @@ rn-ui fills the gap: shadcn's copy-paste model, NativeWind-first styling, and en
 ## Monorepo structure
 
 ```
-rn-ui/
+natwind/
 ├── apps/demo/          # Expo showcase app
 ├── packages/
 │   ├── registry/       # Component source files + useTheme hook
-│   └── cli/            # npx @rn-ui/cli
+│   └── cli/            # npx natwind
 └── pnpm-workspace.yaml
 ```
 

@@ -1,5 +1,5 @@
 {
-  "name": "@rn-ui/registry",
+  "name": "@natwind/registry",
   "version": "0.1.0",
   "main": "./index.ts",
   "exports": {
