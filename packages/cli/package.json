@@ -1,14 +1,18 @@
 {
-  "name": "@rn-ui/cli",
+  "name": "natwind",
   "version": "0.1.0",
-  "description": "CLI to add rn-ui components to your project",
+  "description": "CLI to add NativeWind UI components to your Expo project",
   "main": "./dist/index.js",
   "bin": {
-    "rn-ui": "./dist/index.js"
+    "natwind": "./dist/index.js"
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc",
-    "dev": "tsc --watch"
+    "dev": "tsc --watch",
+    "prepublishOnly": "tsc"
   },
   "dependencies": {
     "commander": "^12.0.0",

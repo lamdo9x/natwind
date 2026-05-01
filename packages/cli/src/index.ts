@@ -7,13 +7,13 @@ import { list } from "./commands/list";
 const program = new Command();
 
 program
-  .name("rn-ui")
-  .description("Add rn-ui components to your Expo project")
+  .name("natwind")
+  .description("Add NativeWind UI components to your Expo project")
   .version("0.1.0");
 
 program
   .command("init")
-  .description("Initialize rn-ui in your project (creates lib/utils.ts, installs deps)")
+  .description("Initialize natwind in your project (creates lib/utils.ts, installs deps)")
   .action(init);
 
 program

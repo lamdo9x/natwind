@@ -34,5 +34,5 @@ export function init() {
 
   console.log(chalk.green("\n✔ rn-ui initialized."));
   console.log(chalk.dim("Next: set up NativeWind if not already done, then run:"));
-  console.log(chalk.cyan("  npx rn-ui add button"));
+  console.log(chalk.cyan("  npx natwind add button"));
 }
