@@ -32,7 +32,7 @@ export function init() {
   console.log(chalk.dim("  Installing clsx, tailwind-merge, class-variance-authority..."));
   execSync(cmd, { stdio: "inherit", cwd });
 
-  console.log(chalk.green("\n✔ rn-ui initialized."));
+  console.log(chalk.green("\n✔ natwind initialized."));
   console.log(chalk.dim("Next: set up NativeWind if not already done, then run:"));
   console.log(chalk.cyan("  npx natwind add button"));
 }
