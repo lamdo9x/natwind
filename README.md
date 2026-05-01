@@ -7,13 +7,13 @@ Components are **copied into your project**, not installed as a package. You own
 ## Quick start
 
 **1. Set up NativeWind in your project** (if not already done)
-→ Follow the [NativeWind v4 install guide](https://www.nativewind.dev/v4/getting-started/expo-router)
+→ Follow the [NativeWind install guide](https://www.nativewind.dev/docs/getting-started/installation)
 
 **2. Initialize rn-ui**
 ```bash
 npx @rn-ui/cli init
 ```
-This creates `lib/utils.ts` (the `cn()` helper) and installs `clsx` + `tailwind-merge`.
+This creates `lib/utils.ts` (the `cn()` helper) and installs `clsx`, `tailwind-merge`, and `class-variance-authority`.
 
 **3. Add components**
 ```bash
@@ -32,11 +32,104 @@ import { Button } from "@/components/ui/button";
 
 ## Available components
 
+### Layout & Primitives
 | Component | Description |
 |-----------|-------------|
-| `button`  | Pressable button — 4 variants, 3 sizes, dual-mode styling |
+| `view` | Themed View wrapper |
+| `text` | Themed Text wrapper |
+| `scroll-view` | Themed ScrollView wrapper |
+| `separator` | Horizontal/vertical divider |
+| `card` | Surface container with header/content/footer slots |
+| `image` | Expo Image with NativeWind support |
+| `icon` | Lucide icon wrapper |
 
-More coming: `input`, `text`, `card`, `badge`, `avatar`, `modal`, `select`, `form-input`
+### Inputs & Forms
+| Component | Description |
+|-----------|-------------|
+| `button` | Pressable button — 4 variants, 3 sizes |
+| `input` | Text input field |
+| `input-otp` | OTP/PIN code input |
+| `checkbox` | Checkbox with label |
+| `radio` | Radio group and item |
+| `switch` | Toggle switch |
+| `toggle` | Single toggle button |
+| `picker` | Native dropdown picker |
+| `combobox` | Searchable select with autocomplete |
+| `date-picker` | Date/time picker |
+| `color-picker` | HSV color picker |
+| `searchbar` | Search input with clear button |
+
+### Feedback & Overlays
+| Component | Description |
+|-----------|-------------|
+| `alert` | Inline alert with icon variants |
+| `alert-dialog` | Modal confirmation dialog |
+| `badge` | Status badge — 4 variants |
+| `progress` | Progress bar |
+| `skeleton` | Loading skeleton placeholder |
+| `spinner` | Activity indicator |
+| `popover` | Floating content popover |
+| `sheet` | Bottom/side sheet drawer |
+| `bottom-sheet` | Full-featured bottom sheet |
+| `action-sheet` | iOS-style action sheet |
+
+### Navigation & Structure
+| Component | Description |
+|-----------|-------------|
+| `tabs` | Tab bar with content panels |
+| `accordion` | Expandable/collapsible sections |
+| `collapsible` | Single expand/collapse section |
+| `link` | Expo Router link wrapper |
+| `table` | Data table |
+
+### Media & Advanced
+| Component | Description |
+|-----------|-------------|
+| `avatar` | User avatar with fallback initials |
+| `camera` | Camera capture view |
+| `camera-preview` | Preview captured photo/video |
+| `audio-player` | Audio playback control |
+| `audio-recorder` | Audio recording control |
+| `audio-waveform` | Waveform visualizer |
+| `gallery` | Photo gallery viewer |
+| `media-picker` | Image/video picker from library |
+| `file-picker` | Document/file picker |
+| `carousel` | Horizontal swipe carousel |
+| `parallax-scrollview` | ScrollView with parallax header |
+
+### Utilities
+| Component | Description |
+|-----------|-------------|
+| `mode-toggle` | Light/dark/system theme toggle |
+| `avoid-keyboard` | KeyboardAvoidingView wrapper |
+| `onboarding` | Multi-step onboarding flow |
+
+## Theming
+
+Components use semantic NativeWind classes (`bg-background`, `text-foreground`, etc.) and expose a `useTheme` hook for programmatic token access.
+
+```tsx
+import { useTheme } from "@/components/ui/theme-provider";
+
+function MyComponent() {
+  const theme = useTheme();
+  // theme.background, theme.foreground, theme.primary, ...
+}
+```
+
+Wrap your app with `ThemeProvider` to enable theme context:
+
+```tsx
+import { ThemeProvider } from "@/components/ui/theme-provider";
+
+export default function RootLayout() {
+  return (
+    <ThemeProvider>
+      {/* your app */}
+    </ThemeProvider>
+  );
+}
+```
 
 ## Component API
 
@@ -63,11 +156,20 @@ npx @rn-ui/cli add <component>   # copy component into your project
 npx @rn-ui/cli list              # list all available components
 ```
 
+## Why rn-ui?
+
+Existing options didn't quite fit:
+
+- **[bna/ui](https://ui.ahmedbna.com/)** — great component selection, but no NativeWind support
+- **[React Native Reusables](https://reactnativereusables.com/)** — shadcn-style copy-paste, but limited component coverage
+
+rn-ui fills the gap: shadcn's copy-paste model, NativeWind-first styling, and enough components to cover a real app.
+
 ## Design principles
 
 - **NativeWind first** — `className` prop as primary styling, `style` as escape hatch only
 - **You own the code** — files are copied, not imported from a package
-- **Dark mode built-in** — `dark:` prefix on every component
+- **Dark mode built-in** — semantic color tokens via `useTheme`, `dark:` prefix on every component
 - **No hidden deps** — each component lists exactly what it needs
 
 ## Monorepo structure
@@ -76,7 +178,7 @@ npx @rn-ui/cli list              # list all available components
 rn-ui/
 ├── apps/demo/          # Expo showcase app
 ├── packages/
-│   ├── registry/       # Component source files
+│   ├── registry/       # Component source files + useTheme hook
 │   └── cli/            # npx @rn-ui/cli
 └── pnpm-workspace.yaml
 ```
