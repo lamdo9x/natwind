@@ -7,10 +7,10 @@
       "@/*": [
         "./*"
       ],
-      "@rn-ui/registry": [
+      "@natwind/registry": [
         "../../packages/registry/index.ts"
       ],
-      "@rn-ui/registry/*": [
+      "@natwind/registry/*": [
         "../../packages/registry/*"
       ]
     }

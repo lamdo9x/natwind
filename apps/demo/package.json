@@ -1,5 +1,5 @@
 {
-  "name": "@rn-ui/demo",
+  "name": "@natwind/demo",
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
@@ -11,7 +11,7 @@
   "dependencies": {
     "@expo/vector-icons": "^15.0.3",
     "@react-navigation/native": "^7.1.8",
-    "@rn-ui/registry": "workspace:*",
+    "@natwind/registry": "workspace:*",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "expo": "~54.0.33",

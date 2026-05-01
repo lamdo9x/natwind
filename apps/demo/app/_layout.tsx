@@ -6,7 +6,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import "react-native-reanimated";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { ToastProvider } from "@rn-ui/registry";
+import { ToastProvider } from "@natwind/registry";
 
 import { useColorScheme } from "@/components/useColorScheme";
 

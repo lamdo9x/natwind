@@ -105,7 +105,7 @@ import {
   useSheet,
   useTheme,
   useToast,
-} from "@rn-ui/registry";
+} from "@natwind/registry";
 
 // expo-image types don't resolve perfectly across the monorepo boundary
 const UIImage = UIImageComponent as any;
@@ -148,7 +148,7 @@ function AccordionDemo() {
     <DemoSection title="Single collapsible">
       <Accordion type="single" collapsible>
         <AccordionItem value="a">
-          <AccordionTrigger>What is rn-ui?</AccordionTrigger>
+          <AccordionTrigger>What is natwind?</AccordionTrigger>
           <AccordionContent>
             <RNText className="text-sm text-muted-foreground">
               A shadcn-style CLI component library for Expo + NativeWind.
@@ -159,7 +159,7 @@ function AccordionDemo() {
           <AccordionTrigger>How does installation work?</AccordionTrigger>
           <AccordionContent>
             <RNText className="text-sm text-muted-foreground">
-              Run npx @rn-ui/cli add button and the component is copied into
+              Run npx natwind add button and the component is copied into
               your project.
             </RNText>
           </AccordionContent>
@@ -414,7 +414,7 @@ function CollapsibleDemo() {
     <DemoSection title="Show / hide">
       <Collapsible title="Installation">
         <RNText className="text-sm text-muted-foreground leading-5">
-          Run npx @rn-ui/cli add collapsible to copy this component into your
+          Run npx natwind add collapsible to copy this component into your
           project.
         </RNText>
       </Collapsible>
@@ -484,7 +484,7 @@ function ImageDemo() {
     <>
       <DemoSection title="Loaded">
         <UIImage
-          source={{ uri: "https://picsum.photos/seed/rn-ui/400/200" }}
+          source={{ uri: "https://picsum.photos/seed/natwind/400/200" }}
           containerClassName="rounded-xl"
           containerStyle={{ height: 160 }}
           style={{ flex: 1 }}
@@ -587,7 +587,7 @@ function OnboardingDemo() {
           <RNText
             className="text-base text-muted-foreground text-center"
           >
-            rn-ui gives you beautiful, copy-paste components for Expo.
+            natwind gives you beautiful, copy-paste components for Expo.
           </RNText>
         </RNView>
       ),
@@ -609,7 +609,7 @@ function OnboardingDemo() {
           <RNText
             className="text-base text-muted-foreground text-center"
           >
-            npx @rn-ui/cli add button — and the component lands in your project.
+            npx natwind add button — and the component lands in your project.
           </RNText>
         </RNView>
       ),
@@ -1252,10 +1252,10 @@ function ShareButtonDemo() {
   return (
     <DemoSection title="Native share sheet">
       <ShareButton
-        content={{ title: "rn-ui", message: "Check out this awesome React Native component library!" }}
+        content={{ title: "natwind", message: "Check out this awesome React Native component library!" }}
         showIcon
       >
-        Share rn-ui
+        Share natwind
       </ShareButton>
       <ShareButton
         variant="outline"

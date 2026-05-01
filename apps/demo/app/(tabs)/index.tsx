@@ -2,7 +2,7 @@ import { router } from "expo-router";
 import { ChevronRight } from "lucide-react-native";
 import { Pressable, SectionList, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useTheme } from "@rn-ui/registry";
+import { useTheme } from "@natwind/registry";
 
 const SECTIONS = [
   {
@@ -164,7 +164,7 @@ export default function ComponentGallery() {
     <SafeAreaView className="flex-1 bg-background">
       <View className="px-4 pt-6 pb-3">
         <Text className="text-2xl font-bold text-foreground">
-          rn-ui
+          natwind
         </Text>
         <Text className="text-sm text-muted-foreground mt-1">
           52 components · Expo + NativeWind
