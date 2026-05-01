@@ -1,10 +1,26 @@
 {
   "name": "natwind",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "CLI to add NativeWind UI components to your Expo project",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lamdo9x/natwind.git"
+  },
+  "homepage": "https://github.com/lamdo9x/natwind",
+  "keywords": [
+    "react-native",
+    "expo",
+    "nativewind",
+    "tailwind",
+    "ui",
+    "components",
+    "shadcn",
+    "cli"
+  ],
   "main": "./dist/index.js",
   "bin": {
-    "natwind": "./dist/index.js"
+    "natwind": "dist/index.js"
   },
   "files": [
     "dist"
