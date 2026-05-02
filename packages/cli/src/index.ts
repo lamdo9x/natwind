@@ -9,7 +9,7 @@ const program = new Command();
 program
   .name("natwind")
   .description("Add NativeWind UI components to your Expo project")
-  .version("0.1.2");
+  .version("0.1.3");
 
 program
   .command("init")

@@ -108,32 +108,43 @@ import { Button } from "@/components/ui/button";
 
 ### Utilities
 
-| Component        | Description                    |
-| ---------------- | ------------------------------ |
-| `mode-toggle`    | Light/dark/system theme toggle |
-| `avoid-keyboard` | KeyboardAvoidingView wrapper   |
-| `onboarding`     | Multi-step onboarding flow     |
+| Component        | Description                                         |
+| ---------------- | --------------------------------------------------- |
+| `theme-provider` | ThemeProvider + useTheme hook for light/dark tokens |
+| `mode-toggle`    | Light/dark/system theme toggle                      |
+| `avoid-keyboard` | KeyboardAvoidingView wrapper                        |
+| `onboarding`     | Multi-step onboarding flow                          |
 
 ## Theming
 
 Components use semantic NativeWind classes (`bg-background`, `text-foreground`, etc.) and expose a `useTheme` hook for programmatic token access.
 
+**1. Add theme-provider to your project**
+
+```bash
+npx natwind add theme-provider
+```
+
+This copies `components/theme/theme-provider.tsx` and `components/theme/tokens.ts` into your project.
+
+**2. Wrap your app**
+
 ```tsx
-import { useTheme } from "@/components/ui/theme-provider";
+import { ThemeProvider } from "@/components/theme/theme-provider";
+
+export default function RootLayout() {
+  return <ThemeProvider>{/* your app */}</ThemeProvider>;
+}
+```
+
+**3. Access tokens in components**
+
+```tsx
+import { useTheme } from "@/components/theme/theme-provider";
 
 function MyComponent() {
   const theme = useTheme();
   // theme.background, theme.foreground, theme.primary, ...
-}
-```
-
-Wrap your app with `ThemeProvider` to enable theme context:
-
-```tsx
-import { ThemeProvider } from "@/components/ui/theme-provider";
-
-export default function RootLayout() {
-  return <ThemeProvider>{/* your app */}</ThemeProvider>;
 }
 ```
 

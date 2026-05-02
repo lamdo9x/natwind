@@ -387,6 +387,23 @@ export const registry: Record<string, RegistryEntry> = {
     registryDependencies: [],
   },
 
+  "theme-provider": {
+    name: "theme-provider",
+    description: "ThemeProvider + useTheme hook — light/dark token context, wraps nativewind useColorScheme",
+    files: [
+      {
+        source: `${GITHUB_RAW}/theme/theme-provider.tsx`,
+        target: "components/theme/theme-provider.tsx",
+      },
+      {
+        source: `${GITHUB_RAW}/theme/tokens.ts`,
+        target: "components/theme/tokens.ts",
+      },
+    ],
+    dependencies: ["nativewind"],
+    registryDependencies: [],
+  },
+
   toast: {
     name: "toast",
     description: "Toast — ToastProvider + useToast hook, 5 variants, slide-in animation, auto-dismiss, Reanimated",
