@@ -1,4 +1,4 @@
-import { useTheme } from '../theme/theme-provider';
+import { useTheme } from '../../theme/theme-provider';
 import { useEffect } from 'react';
 import { View, ViewStyle } from 'react-native';
 import Animated, {
