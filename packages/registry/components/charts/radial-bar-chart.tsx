@@ -1,4 +1,4 @@
-import { useTheme } from '../theme/theme-provider';
+import { useTheme } from '../../theme/theme-provider';
 import { useEffect, useState } from 'react';
 import { LayoutChangeEvent, View, ViewStyle } from 'react-native';
 import Animated, {
@@ -22,6 +22,7 @@ interface ChartConfig {
   animated?: boolean;
   duration?: number;
   gradient?: boolean;
+  showLabels?: boolean;
 }
 
 const PALETTE = ['#3b82f6', '#22c55e', '#f97316', '#a855f7', '#ec4899', '#eab308'];
@@ -62,7 +63,7 @@ export function RadialBarChart({ data, config = {}, style }: Props) {
   const [containerSize, setContainerSize] = useState(200);
   const theme = useTheme();
 
-  const { padding = 10, animated = true, duration = 1000, gradient = false } = config;
+  const { padding = 10, animated = true, duration = 1000, gradient = false, showLabels = true } = config;
 
   const animationProgress = useSharedValue(0);
 
@@ -120,7 +121,7 @@ export function RadialBarChart({ data, config = {}, style }: Props) {
           );
         })}
 
-        {data.map((item, i) => {
+        {showLabels && data.map((item, i) => {
           const r = maxRadius - i * (strokeWidth + 4);
           if (r <= 0) return null;
           return (
