@@ -114,6 +114,35 @@ import { Button } from "@/components/ui/button";
 | `avoid-keyboard` | KeyboardAvoidingView wrapper   |
 | `onboarding`     | Multi-step onboarding flow     |
 
+### Charts
+
+All chart components use `react-native-svg` + `react-native-reanimated`. Install them first:
+
+```bash
+npx expo install react-native-svg react-native-reanimated
+```
+
+| Component              | Description                                                   |
+| ---------------------- | ------------------------------------------------------------- |
+| `bar-chart`            | Vertical bar chart — animated, per-bar colors, value labels   |
+| `line-chart`           | Line chart — bezier curves, grid, Y-axis, gradient area fill  |
+| `area-chart`           | Line chart with gradient fill (thin wrapper around line-chart)|
+| `column-chart`         | Horizontal bar chart — animated width, per-bar colors         |
+| `bubble-chart`         | Scatter chart with sized bubbles                              |
+| `candlestick-chart`    | OHLC financial chart — bullish/bearish colors                 |
+| `pie-chart`            | Animated pie chart — per-slice colors, percentage labels      |
+| `doughnut-chart`       | Donut chart — configurable inner radius                       |
+| `polar-area-chart`     | Polar coordinate area slices with grid rings                  |
+| `radar-chart`          | Spider/radar chart with grid, axis lines, animated fill       |
+| `heatmap-chart`        | Color-interpolated grid with staggered cell animations        |
+| `progress-ring-chart`  | Single animated progress ring — center text, optional gradient|
+| `radial-bar-chart`     | Concentric animated progress rings                            |
+| `scatter-chart`        | Scatter plot — spring-in points, grid, axis labels            |
+| `stacked-area-chart`   | Multi-series stacked smooth areas with gradients and legend   |
+| `stacked-bar-chart`    | Vertical or horizontal stacked bars with categories           |
+| `treemap-chart`        | Squarified hierarchical treemap with animated tiles           |
+| `chart-container`      | Card wrapper with title/description for any chart             |
+
 ## Theming
 
 Components use semantic NativeWind classes (`bg-background`, `text-foreground`, etc.) and expose a `useTheme` hook for programmatic token access.
@@ -191,7 +220,7 @@ natwind/
 
 ## Contributing
 
-1. Add component source to `packages/registry/components/ui/`
+1. Add component source to `packages/registry/components/ui/` (or `components/charts/` for chart components)
 2. Export from `packages/registry/index.ts`
 3. Register in `packages/cli/src/registry.ts` (name, files, deps)
 4. Build CLI: `cd packages/cli && pnpm build`
