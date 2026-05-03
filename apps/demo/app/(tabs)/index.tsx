@@ -67,6 +67,28 @@ const SECTIONS = [
       "video",
     ],
   },
+  {
+    title: "Charts",
+    data: [
+      "bar-chart",
+      "column-chart",
+      "line-chart",
+      "area-chart",
+      "stacked-area-chart",
+      "stacked-bar-chart",
+      "pie-chart",
+      "doughnut-chart",
+      "radar-chart",
+      "polar-area-chart",
+      "scatter-chart",
+      "bubble-chart",
+      "heatmap-chart",
+      "treemap-chart",
+      "radial-bar-chart",
+      "progress-ring-chart",
+      "candlestick-chart",
+    ],
+  },
 ];
 
 const DESCRIPTIONS: Record<string, string> = {
@@ -122,6 +144,23 @@ const DESCRIPTIONS: Record<string, string> = {
   "audio-player": "expo-audio player with waveform + controls",
   "audio-recorder": "Record, playback, timer, waveform preview",
   video: "expo-video, custom controls, progress, mute, loop",
+  "bar-chart": "Horizontal bars, animated fill, themed colors",
+  "column-chart": "Vertical columns, labels, Reanimated",
+  "line-chart": "Smooth bezier line, gradient fill, grid",
+  "area-chart": "Filled area under line, gradient, animated",
+  "stacked-area-chart": "Multi-series stacked area, animated",
+  "stacked-bar-chart": "Segmented bars with categories",
+  "pie-chart": "Proportional slices, labels, animated fade",
+  "doughnut-chart": "Pie with hole, center label, animated",
+  "radar-chart": "Spider/radar polygon, multi-axis",
+  "polar-area-chart": "Equal-angle wedges scaled by value",
+  "scatter-chart": "X/Y dot plot, spring animation",
+  "bubble-chart": "Scatter with size dimension per point",
+  "heatmap-chart": "Grid cells color-coded by intensity",
+  "treemap-chart": "Squarified rectangles by value",
+  "radial-bar-chart": "Concentric ring bars, gradient option",
+  "progress-ring-chart": "Single circular progress, center text",
+  "candlestick-chart": "OHLC finance chart, green/red candles",
 };
 
 const TITLE_MAP: Record<string, string> = {
@@ -146,6 +185,23 @@ const TITLE_MAP: Record<string, string> = {
   "action-sheet": "ActionSheet",
   "bottom-sheet": "BottomSheet",
   video: "VideoPlayer",
+  "bar-chart": "BarChart",
+  "column-chart": "ColumnChart",
+  "line-chart": "LineChart",
+  "area-chart": "AreaChart",
+  "stacked-area-chart": "StackedAreaChart",
+  "stacked-bar-chart": "StackedBarChart",
+  "pie-chart": "PieChart",
+  "doughnut-chart": "DoughnutChart",
+  "radar-chart": "RadarChart",
+  "polar-area-chart": "PolarAreaChart",
+  "scatter-chart": "ScatterChart",
+  "bubble-chart": "BubbleChart",
+  "heatmap-chart": "HeatmapChart",
+  "treemap-chart": "TreemapChart",
+  "radial-bar-chart": "RadialBarChart",
+  "progress-ring-chart": "ProgressRingChart",
+  "candlestick-chart": "CandlestickChart",
 };
 
 function formatTitle(name: string): string {
@@ -167,7 +223,7 @@ export default function ComponentGallery() {
           natwind
         </Text>
         <Text className="text-sm text-muted-foreground mt-1">
-          52 components · Expo + NativeWind
+          70 components · Expo + NativeWind
         </Text>
       </View>
 

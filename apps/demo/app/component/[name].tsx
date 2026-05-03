@@ -99,6 +99,23 @@ import {
   Toggle,
   VideoPlayer,
   View as UIView,
+  AreaChart,
+  BarChart,
+  BubbleChart,
+  CandlestickChart,
+  ColumnChart,
+  DoughnutChart,
+  HeatmapChart,
+  LineChart,
+  PieChart,
+  PolarAreaChart,
+  ProgressRingChart,
+  RadarChart,
+  RadialBarChart,
+  ScatterChart,
+  StackedAreaChart,
+  StackedBarChart,
+  TreemapChart,
   useActionSheet,
   useAlertDialog,
   useBottomSheet,
@@ -1365,6 +1382,246 @@ function VideoPlayerDemo() {
   );
 }
 
+// ─── Chart demos ─────────────────────────────────────────────────────────────
+
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"];
+const BAR_DATA = [
+  { label: "Mon", value: 42 },
+  { label: "Tue", value: 78 },
+  { label: "Wed", value: 55 },
+  { label: "Thu", value: 91 },
+  { label: "Fri", value: 63 },
+  { label: "Sat", value: 34 },
+];
+const LINE_DATA = MONTHS.map((label, i) => ({ x: label, y: [38, 55, 47, 70, 60, 85][i] }));
+const PIE_DATA = [
+  { label: "React Native", value: 40 },
+  { label: "Expo", value: 30 },
+  { label: "NativeWind", value: 20 },
+  { label: "Other", value: 10 },
+];
+
+function BarChartDemo() {
+  return (
+    <DemoSection title="Horizontal bars">
+      <BarChart data={BAR_DATA} config={{ animated: true }} />
+    </DemoSection>
+  );
+}
+
+function ColumnChartDemo() {
+  return (
+    <DemoSection title="Vertical columns">
+      <ColumnChart data={BAR_DATA} config={{ animated: true, showLabels: true }} />
+    </DemoSection>
+  );
+}
+
+function LineChartDemo() {
+  return (
+    <DemoSection title="Smooth bezier line">
+      <LineChart data={LINE_DATA} config={{ animated: true, showGrid: true, gradient: true }} />
+    </DemoSection>
+  );
+}
+
+function AreaChartDemo() {
+  return (
+    <DemoSection title="Filled area">
+      <AreaChart data={LINE_DATA} config={{ animated: true, showGrid: true, gradient: true }} />
+    </DemoSection>
+  );
+}
+
+function StackedAreaChartDemo() {
+  const data = MONTHS.map((label, i) => ({
+    x: i,
+    y: [[20, 15], [30, 20], [25, 30], [40, 25], [35, 35], [50, 40]][i],
+    label,
+  }));
+  return (
+    <DemoSection title="Multi-series stacked area">
+      <StackedAreaChart
+        data={data}
+        colors={["#3b82f6", "#22c55e"]}
+        categories={["iOS", "Android"]}
+        config={{ animated: true, showGrid: true }}
+      />
+    </DemoSection>
+  );
+}
+
+function StackedBarChartDemo() {
+  const data = MONTHS.map((label, i) => ({
+    label,
+    values: [[20, 15, 10], [30, 20, 15], [25, 30, 20], [40, 25, 15], [35, 35, 20], [50, 40, 25]][i],
+  }));
+  return (
+    <DemoSection title="Segmented bars">
+      <StackedBarChart
+        data={data}
+        categories={["iOS", "Android", "Web"]}
+        colors={["#3b82f6", "#22c55e", "#f97316"]}
+        horizontal
+        config={{ animated: true, showLabels: true, height: 260 }}
+      />
+    </DemoSection>
+  );
+}
+
+function PieChartDemo() {
+  return (
+    <DemoSection title="Proportional slices">
+      <PieChart data={PIE_DATA} config={{ animated: true, showLabels: true }} />
+    </DemoSection>
+  );
+}
+
+function DoughnutChartDemo() {
+  return (
+    <DemoSection title="Doughnut with hole">
+      <DoughnutChart data={PIE_DATA} config={{ animated: true, showLabels: true }} />
+    </DemoSection>
+  );
+}
+
+function RadarChartDemo() {
+  const data = [
+    { label: "Speed", value: 80 },
+    { label: "Power", value: 65 },
+    { label: "Range", value: 70 },
+    { label: "Accuracy", value: 90 },
+    { label: "Stamina", value: 55 },
+    { label: "Agility", value: 75 },
+  ];
+  return (
+    <DemoSection title="Spider chart">
+      <RadarChart data={data} config={{ animated: true, showLabels: true, maxValue: 100 }} />
+    </DemoSection>
+  );
+}
+
+function PolarAreaChartDemo() {
+  return (
+    <DemoSection title="Equal-angle wedges by value">
+      <PolarAreaChart data={PIE_DATA} config={{ animated: true, showLabels: true }} />
+    </DemoSection>
+  );
+}
+
+function ScatterChartDemo() {
+  const data = Array.from({ length: 20 }, (_, i) => ({
+    x: Math.random() * 100,
+    y: Math.random() * 100,
+    label: `P${i}`,
+  }));
+  return (
+    <DemoSection title="X/Y dot plot">
+      <ScatterChart data={data} config={{ animated: true, showGrid: true }} />
+    </DemoSection>
+  );
+}
+
+function BubbleChartDemo() {
+  const data = [
+    { x: 20, y: 70, size: 30, label: "A", color: "#3b82f6" },
+    { x: 50, y: 40, size: 50, label: "B", color: "#22c55e" },
+    { x: 80, y: 60, size: 20, label: "C", color: "#f97316" },
+    { x: 35, y: 20, size: 40, label: "D", color: "#a855f7" },
+    { x: 65, y: 80, size: 35, label: "E", color: "#ec4899" },
+  ];
+  return (
+    <DemoSection title="Scatter with size dimension">
+      <BubbleChart data={data} config={{ animated: true, showGrid: true }} />
+    </DemoSection>
+  );
+}
+
+function HeatmapChartDemo() {
+  const days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+  const hours = ["9am", "12pm", "3pm", "6pm"];
+  const data = days.flatMap((row) =>
+    hours.map((col) => ({ row, col, value: Math.floor(Math.random() * 100) }))
+  );
+  return (
+    <DemoSection title="Grid intensity map">
+      <HeatmapChart data={data} config={{ animated: true, showLabels: true }} />
+    </DemoSection>
+  );
+}
+
+function TreemapChartDemo() {
+  const data = [
+    { label: "React Native", value: 40, color: "#3b82f6" },
+    { label: "Expo", value: 30, color: "#22c55e" },
+    { label: "NativeWind", value: 20, color: "#f97316" },
+    { label: "Reanimated", value: 15, color: "#a855f7" },
+    { label: "SVG", value: 10, color: "#ec4899" },
+    { label: "Other", value: 5, color: "#eab308" },
+  ];
+  return (
+    <DemoSection title="Squarified rectangles">
+      <TreemapChart data={data} config={{ animated: true, showLabels: true }} />
+    </DemoSection>
+  );
+}
+
+function RadialBarChartDemo() {
+  const data = [
+    { label: "TypeScript", value: 85, color: "#3b82f6" },
+    { label: "React Native", value: 72, color: "#22c55e" },
+    { label: "Expo", value: 60, color: "#f97316" },
+    { label: "NativeWind", value: 45, color: "#a855f7" },
+  ];
+  return (
+    <DemoSection title="Concentric ring bars">
+      <RadialBarChart data={data} config={{ animated: true, gradient: true, showLabels: false }} />
+      <RNView style={{ flexDirection: "row", flexWrap: "wrap", gap: 12, marginTop: 12, justifyContent: "center" }}>
+        {data.map((item) => (
+          <RNView key={item.label} style={{ flexDirection: "row", alignItems: "center", gap: 6 }}>
+            <RNView style={{ width: 10, height: 10, borderRadius: 5, backgroundColor: item.color }} />
+            <RNText style={{ fontSize: 12, color: "#888" }}>{item.label} · {item.value}%</RNText>
+          </RNView>
+        ))}
+      </RNView>
+    </DemoSection>
+  );
+}
+
+function ProgressRingChartDemo() {
+  const [value, setValue] = useState(72);
+  return (
+    <DemoSection title="Circular progress">
+      <RNView style={{ alignItems: "center", gap: 16 }}>
+        <RNView style={{ flexDirection: "row", gap: 24 }}>
+          <ProgressRingChart progress={value} size={120} strokeWidth={10} showLabel centerText={`${value}%`} config={{ gradient: true }} />
+          <ProgressRingChart progress={45} size={120} strokeWidth={10} showLabel label="Tasks" config={{ animated: true }} />
+        </RNView>
+        <RNView style={{ flexDirection: "row", gap: 8 }}>
+          <Button variant="outline" size="sm" style={{ flex: 1 }} onPress={() => setValue((v) => Math.max(0, v - 10))}>-10</Button>
+          <Button size="sm" style={{ flex: 1 }} onPress={() => setValue((v) => Math.min(100, v + 10))}>+10</Button>
+        </RNView>
+      </RNView>
+    </DemoSection>
+  );
+}
+
+function CandlestickChartDemo() {
+  const data = [
+    { date: "Mon", open: 100, high: 115, low: 95, close: 110 },
+    { date: "Tue", open: 110, high: 120, low: 105, close: 108 },
+    { date: "Wed", open: 108, high: 125, low: 102, close: 120 },
+    { date: "Thu", open: 120, high: 130, low: 112, close: 115 },
+    { date: "Fri", open: 115, high: 122, low: 108, close: 118 },
+    { date: "Sat", open: 118, high: 135, low: 115, close: 130 },
+  ];
+  return (
+    <DemoSection title="OHLC finance chart">
+      <CandlestickChart data={data} config={{ animated: true, showGrid: true, showLabels: true }} />
+    </DemoSection>
+  );
+}
+
 // ─── Registry ─────────────────────────────────────────────────────────────────
 
 const DEMOS: Record<string, React.ComponentType> = {
@@ -1420,6 +1677,23 @@ const DEMOS: Record<string, React.ComponentType> = {
   toast: ToastDemo,
   video: VideoPlayerDemo,
   view: ViewDemo,
+  "bar-chart": BarChartDemo,
+  "column-chart": ColumnChartDemo,
+  "line-chart": LineChartDemo,
+  "area-chart": AreaChartDemo,
+  "stacked-area-chart": StackedAreaChartDemo,
+  "stacked-bar-chart": StackedBarChartDemo,
+  "pie-chart": PieChartDemo,
+  "doughnut-chart": DoughnutChartDemo,
+  "radar-chart": RadarChartDemo,
+  "polar-area-chart": PolarAreaChartDemo,
+  "scatter-chart": ScatterChartDemo,
+  "bubble-chart": BubbleChartDemo,
+  "heatmap-chart": HeatmapChartDemo,
+  "treemap-chart": TreemapChartDemo,
+  "radial-bar-chart": RadialBarChartDemo,
+  "progress-ring-chart": ProgressRingChartDemo,
+  "candlestick-chart": CandlestickChartDemo,
 };
 
 const TITLE_MAP: Record<string, string> = {
@@ -1444,6 +1718,23 @@ const TITLE_MAP: Record<string, string> = {
   "action-sheet": "ActionSheet",
   "bottom-sheet": "BottomSheet",
   video: "VideoPlayer",
+  "bar-chart": "BarChart",
+  "column-chart": "ColumnChart",
+  "line-chart": "LineChart",
+  "area-chart": "AreaChart",
+  "stacked-area-chart": "StackedAreaChart",
+  "stacked-bar-chart": "StackedBarChart",
+  "pie-chart": "PieChart",
+  "doughnut-chart": "DoughnutChart",
+  "radar-chart": "RadarChart",
+  "polar-area-chart": "PolarAreaChart",
+  "scatter-chart": "ScatterChart",
+  "bubble-chart": "BubbleChart",
+  "heatmap-chart": "HeatmapChart",
+  "treemap-chart": "TreemapChart",
+  "radial-bar-chart": "RadialBarChart",
+  "progress-ring-chart": "ProgressRingChart",
+  "candlestick-chart": "CandlestickChart",
 };
 
 function displayTitle(name: string): string {
