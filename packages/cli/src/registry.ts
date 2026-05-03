@@ -702,6 +702,150 @@ export const registry: Record<string, RegistryEntry> = {
     dependencies: ["clsx", "tailwind-merge", "lucide-react-native", "expo-video", "expo"],
     registryDependencies: ["progress", "text"],
   },
+
+  "bar-chart": {
+    name: "bar-chart",
+    description: "BarChart — animated SVG bar chart, per-bar colors, value labels, Reanimated withTiming",
+    files: [{ source: `${GITHUB_RAW}/components/charts/bar-chart.tsx`, target: "components/charts/bar-chart.tsx" }],
+    dependencies: ["react-native-svg", "react-native-reanimated"],
+    registryDependencies: ["theme-provider"],
+  },
+
+  "line-chart": {
+    name: "line-chart",
+    description: "LineChart — animated SVG line chart, grid, Y-axis labels, gradient area fill, smooth bezier curves",
+    files: [{ source: `${GITHUB_RAW}/components/charts/line-chart.tsx`, target: "components/charts/line-chart.tsx" }],
+    dependencies: ["react-native-svg", "react-native-reanimated"],
+    registryDependencies: ["theme-provider"],
+  },
+
+  "area-chart": {
+    name: "area-chart",
+    description: "AreaChart — LineChart with gradient fill, same API as line-chart",
+    files: [{ source: `${GITHUB_RAW}/components/charts/area-chart.tsx`, target: "components/charts/area-chart.tsx" }],
+    dependencies: ["react-native-svg", "react-native-reanimated"],
+    registryDependencies: ["theme-provider", "line-chart"],
+  },
+
+  "column-chart": {
+    name: "column-chart",
+    description: "ColumnChart — horizontal bar chart, animated width, labels, per-bar colors",
+    files: [{ source: `${GITHUB_RAW}/components/charts/column-chart.tsx`, target: "components/charts/column-chart.tsx" }],
+    dependencies: ["react-native-svg", "react-native-reanimated"],
+    registryDependencies: ["theme-provider"],
+  },
+
+  "bubble-chart": {
+    name: "bubble-chart",
+    description: "BubbleChart — animated SVG scatter chart with sized bubbles, grid, labels",
+    files: [{ source: `${GITHUB_RAW}/components/charts/bubble-chart.tsx`, target: "components/charts/bubble-chart.tsx" }],
+    dependencies: ["react-native-svg", "react-native-reanimated"],
+    registryDependencies: ["theme-provider"],
+  },
+
+  "candlestick-chart": {
+    name: "candlestick-chart",
+    description: "CandlestickChart — OHLC financial chart, bullish/bearish colors, animated candle bodies",
+    files: [{ source: `${GITHUB_RAW}/components/charts/candlestick-chart.tsx`, target: "components/charts/candlestick-chart.tsx" }],
+    dependencies: ["react-native-svg", "react-native-reanimated"],
+    registryDependencies: ["theme-provider"],
+  },
+
+  "pie-chart": {
+    name: "pie-chart",
+    description: "PieChart — animated SVG pie, per-slice colors, percentage labels",
+    files: [{ source: `${GITHUB_RAW}/components/charts/pie-chart.tsx`, target: "components/charts/pie-chart.tsx" }],
+    dependencies: ["react-native-svg", "react-native-reanimated"],
+    registryDependencies: ["theme-provider"],
+  },
+
+  "doughnut-chart": {
+    name: "doughnut-chart",
+    description: "DoughnutChart — animated donut/ring chart, configurable inner radius, percentage labels",
+    files: [{ source: `${GITHUB_RAW}/components/charts/doughnut-chart.tsx`, target: "components/charts/doughnut-chart.tsx" }],
+    dependencies: ["react-native-svg", "react-native-reanimated"],
+    registryDependencies: ["theme-provider"],
+  },
+
+  "heatmap-chart": {
+    name: "heatmap-chart",
+    description: "HeatmapChart — color-interpolated grid, staggered cell animations, custom color scales",
+    files: [{ source: `${GITHUB_RAW}/components/charts/heatmap-chart.tsx`, target: "components/charts/heatmap-chart.tsx" }],
+    dependencies: ["react-native-svg", "react-native-reanimated"],
+    registryDependencies: ["theme-provider"],
+  },
+
+  "polar-area-chart": {
+    name: "polar-area-chart",
+    description: "PolarAreaChart — polar coordinate area slices, grid rings, labels, animated fade-in",
+    files: [{ source: `${GITHUB_RAW}/components/charts/polar-area-chart.tsx`, target: "components/charts/polar-area-chart.tsx" }],
+    dependencies: ["react-native-svg", "react-native-reanimated"],
+    registryDependencies: ["theme-provider"],
+  },
+
+  "progress-ring-chart": {
+    name: "progress-ring-chart",
+    description: "ProgressRingChart — single animated progress ring, center text, optional gradient stroke",
+    files: [{ source: `${GITHUB_RAW}/components/charts/progress-ring-chart.tsx`, target: "components/charts/progress-ring-chart.tsx" }],
+    dependencies: ["react-native-svg", "react-native-reanimated"],
+    registryDependencies: ["theme-provider"],
+  },
+
+  "radar-chart": {
+    name: "radar-chart",
+    description: "RadarChart — spider/radar chart, grid circles, axis lines, animated fill and stroke, dots",
+    files: [{ source: `${GITHUB_RAW}/components/charts/radar-chart.tsx`, target: "components/charts/radar-chart.tsx" }],
+    dependencies: ["react-native-svg", "react-native-reanimated"],
+    registryDependencies: ["theme-provider"],
+  },
+
+  "radial-bar-chart": {
+    name: "radial-bar-chart",
+    description: "RadialBarChart — concentric animated progress rings, per-ring colors, optional gradient",
+    files: [{ source: `${GITHUB_RAW}/components/charts/radial-bar-chart.tsx`, target: "components/charts/radial-bar-chart.tsx" }],
+    dependencies: ["react-native-svg", "react-native-reanimated"],
+    registryDependencies: ["theme-provider"],
+  },
+
+  "chart-container": {
+    name: "chart-container",
+    description: "ChartContainer — card wrapper with title, description, and themed background for any chart",
+    files: [{ source: `${GITHUB_RAW}/components/charts/chart-container.tsx`, target: "components/charts/chart-container.tsx" }],
+    dependencies: [],
+    registryDependencies: ["text"],
+  },
+
+  "scatter-chart": {
+    name: "scatter-chart",
+    description: "ScatterChart — animated scatter plot with grid, axis labels, and spring-in points",
+    files: [{ source: `${GITHUB_RAW}/components/charts/scatter-chart.tsx`, target: "components/charts/scatter-chart.tsx" }],
+    dependencies: ["react-native-svg", "react-native-reanimated"],
+    registryDependencies: ["theme-provider"],
+  },
+
+  "stacked-area-chart": {
+    name: "stacked-area-chart",
+    description: "StackedAreaChart — multi-series stacked smooth areas with gradients and legend",
+    files: [{ source: `${GITHUB_RAW}/components/charts/stacked-area-chart.tsx`, target: "components/charts/stacked-area-chart.tsx" }],
+    dependencies: ["react-native-svg", "react-native-reanimated"],
+    registryDependencies: ["theme-provider"],
+  },
+
+  "stacked-bar-chart": {
+    name: "stacked-bar-chart",
+    description: "StackedBarChart — vertical or horizontal stacked bars with categories and legend",
+    files: [{ source: `${GITHUB_RAW}/components/charts/stacked-bar-chart.tsx`, target: "components/charts/stacked-bar-chart.tsx" }],
+    dependencies: ["react-native-svg", "react-native-reanimated"],
+    registryDependencies: ["theme-provider"],
+  },
+
+  "treemap-chart": {
+    name: "treemap-chart",
+    description: "TreemapChart — squarified hierarchical treemap with animated tiles and labels",
+    files: [{ source: `${GITHUB_RAW}/components/charts/treemap-chart.tsx`, target: "components/charts/treemap-chart.tsx" }],
+    dependencies: ["react-native-svg", "react-native-reanimated"],
+    registryDependencies: ["theme-provider"],
+  },
 };
 
 export function getComponent(name: string): RegistryEntry | undefined {
