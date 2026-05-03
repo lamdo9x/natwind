@@ -106,6 +106,29 @@ import { Button } from "@/components/ui/button";
 | `carousel`            | Horizontal swipe carousel          |
 | `parallax-scrollview` | ScrollView with parallax header    |
 
+### Charts
+
+| Component             | Description                                |
+| --------------------- | ------------------------------------------ |
+| `area-chart`          | Area chart (SVG)                           |
+| `bar-chart`           | Horizontal bar chart (SVG)                 |
+| `bubble-chart`        | Bubble chart (SVG)                         |
+| `candlestick-chart`   | Candlestick chart for financial data (SVG) |
+| `chart-container`     | Base container wrapper for charts          |
+| `column-chart`        | Vertical column chart (SVG)               |
+| `doughnut-chart`      | Doughnut/ring chart (SVG)                  |
+| `heatmap-chart`       | Heatmap grid chart (SVG)                   |
+| `line-chart`          | Line chart with Reanimated animations      |
+| `pie-chart`           | Pie chart (SVG)                            |
+| `polar-area-chart`    | Polar area chart (SVG)                     |
+| `progress-ring-chart` | Animated progress ring (Reanimated)        |
+| `radar-chart`         | Radar/spider chart (SVG)                   |
+| `radial-bar-chart`    | Radial bar chart (Reanimated)              |
+| `scatter-chart`       | Scatter plot chart (SVG)                   |
+| `stacked-area-chart`  | Stacked area chart (Reanimated)            |
+| `stacked-bar-chart`   | Stacked bar chart (Reanimated)             |
+| `treemap-chart`       | Treemap hierarchical chart (SVG)           |
+
 ### Utilities
 
 | Component        | Description                                         |
